@@ -12,7 +12,6 @@ import playn.core.GroupLayer;
 import playn.core.Image;
 import playn.core.ImageLayer;
 import playn.core.Pointer;
-import pythagoras.f.Point;
 
 public class FingerBall implements Game {
 	private GroupLayer ballLayer;
@@ -30,9 +29,14 @@ public class FingerBall implements Game {
 
     pointer().setListener(new Pointer.Adapter() {
       @Override
-      public void onPointerEnd(Pointer.Event event) {
-    	  Point clickPosition = new Point(event.x(),event.y());
-    	  ball.click(clickPosition);
+      public void onPointerStart(Pointer.Event event) {    	  
+    	  float x = physicsBall.getPosition().x - (event.x()/10);
+    	  float y = physicsBall.getPosition().y - (event.y()/10);
+    	  Vec2 impulse = new Vec2(x, y);
+    	  impulse.normalize();
+    	  Vec2 impulseForce = impulse.mul(500);
+    	  physicsBall.applyLinearImpulse(impulseForce, physicsBall.getPosition());
+    	  physicsBall.applyAngularImpulse(x);
       }
     });
     
@@ -70,7 +74,7 @@ public class FingerBall implements Game {
 		ball.update(delta);
 		world.update();
 		Vec2 position = physicsBall.getPosition();
-		ball.setPosition(position.x*10, position.y*10);
+		ball.setPositionAndRotation(position.x*10, position.y*10,physicsBall.getAngle());
 		
 	}
 

@@ -33,10 +33,9 @@ public class FingerBallWorld {
 		fixtureDef.shape = circleShape;
 		fixtureDef.density = 0.4f;
 		fixtureDef.friction = 0.1f;
-		fixtureDef.restitution = 0.35f;
+		fixtureDef.restitution = 0.5f;
 		
 		body.createFixture(fixtureDef);
-//		body.setUserData(data)
 		body.setLinearDamping(0.3f);
 		body.setTransform(new Vec2(x, y), 0);
 		return body;
@@ -55,7 +54,6 @@ public class FingerBallWorld {
 		PolygonShape groundShape = new PolygonShape();
 		groundShape.setAsEdge(new Vec2(0, height), new Vec2(width, height));
 		ground.createFixture(groundShape, 0.0f);
-
 	}
 
 	public void update() {

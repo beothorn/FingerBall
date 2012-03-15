@@ -26,7 +26,7 @@ public class Ball {
 			@Override
 			public void done(Image image) {
 				setOriginAtCenter(image);
-				setPosition(x, y);
+				setPositionAndRotation(x, y, 0);
 				ballLayer.add(layer);
 			}
 
@@ -42,22 +42,15 @@ public class Ball {
 		});
 	}
 
-	public void setPosition(final float x, final float y) {
+	public void setPositionAndRotation(final float x, final float y,float angle) {
 		this.x = x;
 		this.y = y;
+		this.angle = angle;
 		layer.setTranslation(x, y);
 	}
 
 	public void update(float delta) {
-		angle += delta;
 		layer.setRotation(angle);
 		layer.setTranslation(x, y);
-	}
-
-	public void click(Point p) {
-		float distance = p.distance(x+radius, y+radius);
-		if(distance<radius){
-			System.out.println("click");
-		}
 	}
 }
