@@ -7,7 +7,6 @@ import playn.core.GroupLayer;
 import playn.core.Image;
 import playn.core.ImageLayer;
 import playn.core.ResourceCallback;
-import pythagoras.f.Point;
 
 public class Ball {
 
