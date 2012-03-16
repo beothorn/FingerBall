@@ -30,4 +30,14 @@ public class MetersToPixelsTest {
 		Assert.assertEquals( "(400px,160px)", screenPoint.toString());
 	}
 	
+	@Test
+	public void meterSizeToPixelSize(){
+		int sizeInPixels = subject.metersWidthToPixels(2f);
+		Assert.assertEquals(800, sizeInPixels);
+		sizeInPixels = subject.metersHeightToPixels(3f);
+		Assert.assertEquals(320, sizeInPixels);
+	}
+	
+	
+	
 }
