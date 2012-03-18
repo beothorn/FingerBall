@@ -22,4 +22,14 @@ public class PhysicBodyMock implements PhysicBody {
 		return 0;
 	}
 
+	@Override
+	public void applyLinearImpulse(Vec2 impulseForce) {
+		throw new RuntimeException("NOT IMPLEMENTED");
+	}
+
+	@Override
+	public void applyAngularImpulse(float impulse) {
+		throw new RuntimeException("NOT IMPLEMENTED");
+	}
+
 }

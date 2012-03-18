@@ -1,62 +1,63 @@
 package beothorn.labs.core;
 
-import org.jbox2d.collision.shapes.CircleShape;
+import static playn.core.PlayN.graphics;
+
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.BodyDef;
-import org.jbox2d.dynamics.BodyType;
-import org.jbox2d.dynamics.FixtureDef;
 import org.jbox2d.dynamics.World;
+
+import playn.core.Graphics;
+import beothorn.fingerball.DimensionMeters;
+import beothorn.fingerball.DimensionPixels;
+import beothorn.fingerball.MetersToPixels;
 
 public class FingerBallWorld {
 
-	private static final int BALL_RADIUS = 3;
+	private static final DimensionMeters worldDimension = new DimensionMeters(2.31f,1.73f);
+	private static final Vec2 gravity = new Vec2(0.0f, 0.01f);
 	private World world;
+	private final MetersToPixels metersToPixels;
+	private final Graphics graphics;
+	private Ball ball;
 
-	public FingerBallWorld(float width, float height) {
+	public FingerBallWorld() {
+		this.graphics = graphics();
+		DimensionPixels screenDimensions = new DimensionPixels(graphics.width(), graphics.height());
+		this.metersToPixels = new MetersToPixels(screenDimensions, worldDimension);
+		
 		createWorld();
-		createGround(width, height);
+		createBoundaries();
+		createBall();
 	}
 
-	public Body createBall(float x, float y) {
-		BodyDef bodyDef = new BodyDef();
-		bodyDef.type = BodyType.DYNAMIC;
-		bodyDef.position = new Vec2(0, 0);
-		Body body = world.createBody(bodyDef);
-
-		CircleShape circleShape = new CircleShape();
-		circleShape.m_radius = BALL_RADIUS;
-		circleShape.m_p.set(0, 0);
-		
-		FixtureDef fixtureDef = new FixtureDef();
-		fixtureDef.shape = circleShape;
-		fixtureDef.density = 0.4f;
-		fixtureDef.friction = 0.1f;
-		fixtureDef.restitution = 0.5f;
-		
-		body.createFixture(fixtureDef);
-		body.setLinearDamping(0.3f);
-		body.setTransform(new Vec2(x, y), 0);
-		return body;
+	private void createBall() {
+		ball = new Ball(world, metersToPixels, 1, 1);
 	}
 
 	private void createWorld() {
-		Vec2 gravity = new Vec2(0.0f, 1.0f);
 		boolean doNotSimulateInactiveBodies = true;
 		world = new World(gravity, doNotSimulateInactiveBodies);
 		world.setWarmStarting(true);
 		world.setAutoClearForces(true);
 	}
 
-	private void createGround(float width, float height) {
+	private void createBoundaries() {
+		createWall(new Vec2(0, worldDimension.height), new Vec2(worldDimension.width, worldDimension.height));
+		createWall(new Vec2(0, 0), new Vec2(0, worldDimension.height));
+		createWall(new Vec2(worldDimension.width, 0), new Vec2(worldDimension.width, worldDimension.height));
+	}
+
+	private void createWall(Vec2 start, Vec2 end) {
 		Body ground = world.createBody(new BodyDef());
 		PolygonShape groundShape = new PolygonShape();
-		groundShape.setAsEdge(new Vec2(0, height), new Vec2(width, height));
+		groundShape.setAsEdge(start, end);
 		ground.createFixture(groundShape, 0.0f);
 	}
 
 	public void update() {
 		world.step(0.33f, 10, 10);
+		ball.update();
 	}
 }

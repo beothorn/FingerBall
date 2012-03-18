@@ -26,4 +26,11 @@ public class ImageToBody {
 		imageLayer.setTranslation(x, y);
 	}
 
+	public float getPhisicalX() {
+		return physicBody.getPosition().x;
+	}
+
+	public float getPhisicalY() {
+		return physicBody.getPosition().y;
+	}
 }
