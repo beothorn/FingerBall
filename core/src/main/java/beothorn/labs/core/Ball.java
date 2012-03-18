@@ -50,7 +50,7 @@ public class Ball {
 				impulse.normalize();
 				Vec2 impulseForce = impulse.mul(0.02f);
 				ballBody.applyLinearImpulse(impulseForce);
-				ballBody.applyAngularImpulse(impulseForce.x);
+				ballBody.applyAngularImpulse(impulseForce.x*0.1f);
 			}
 		});
 	}

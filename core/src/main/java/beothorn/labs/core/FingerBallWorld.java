@@ -16,7 +16,7 @@ import beothorn.fingerball.MetersToPixels;
 public class FingerBallWorld {
 
 	private static final DimensionMeters worldDimension = new DimensionMeters(2.31f,1.73f);
-	private static final Vec2 gravity = new Vec2(0.0f, 0.01f);
+	private static final Vec2 gravity = new Vec2(0.0f, 0.05f);
 	private World world;
 	private final MetersToPixels metersToPixels;
 	private final Graphics graphics;
@@ -46,6 +46,7 @@ public class FingerBallWorld {
 	private void createBoundaries() {
 		createWall(new Vec2(0, worldDimension.height), new Vec2(worldDimension.width, worldDimension.height));
 		createWall(new Vec2(0, 0), new Vec2(0, worldDimension.height));
+		createWall(new Vec2(0, 0), new Vec2(worldDimension.width, 0));
 		createWall(new Vec2(worldDimension.width, 0), new Vec2(worldDimension.width, worldDimension.height));
 	}
 
