@@ -27,7 +27,7 @@ import beothorn.fingerball.PointPixels;
 public class Ball {
 
 	public static String IMAGE = "images/soccerBall.png";
-	private static final float BALL_RADIUS = 0.2f;
+	private static final float BALL_RADIUS = 0.1f;
 	
 	private float radius;
 	private ImageToBody imageToBody;
@@ -48,7 +48,7 @@ public class Ball {
 				float deltaX = imageToBody.getPhisicalX()- pixelsToMeters.x;
 				Vec2 impulse = new Vec2(deltaX, imageToBody.getPhisicalY() - pixelsToMeters.y);
 				impulse.normalize();
-				Vec2 impulseForce = impulse.mul(0.02f);
+				Vec2 impulseForce = impulse.mul(0.006f);
 				ballBody.applyLinearImpulse(impulseForce);
 				ballBody.applyAngularImpulse(impulseForce.x*0.1f);
 			}
@@ -82,7 +82,6 @@ public class Ball {
 	private PhysicBody createBallBody(World world,float x, float y) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DYNAMIC;
-		bodyDef.position = new Vec2(0, 0);
 		Body body = world.createBody(bodyDef);
 
 		CircleShape circleShape = new CircleShape();

@@ -44,10 +44,26 @@ public class FingerBallWorld {
 	}
 
 	private void createBoundaries() {
+		createCeiling();
+		createFloor();
+		createLeftWall();
+		createRightWall();
+	}
+
+	private void createFloor() {
 		createWall(new Vec2(0, worldDimension.height), new Vec2(worldDimension.width, worldDimension.height));
-		createWall(new Vec2(0, 0), new Vec2(0, worldDimension.height));
-		createWall(new Vec2(0, 0), new Vec2(worldDimension.width, 0));
+	}
+
+	private void createRightWall() {
 		createWall(new Vec2(worldDimension.width, 0), new Vec2(worldDimension.width, worldDimension.height));
+	}
+
+	private void createLeftWall() {
+		createWall(new Vec2(0, 0), new Vec2(0, worldDimension.height));
+	}
+
+	private void createCeiling() {
+		createWall(new Vec2(0, 0), new Vec2(worldDimension.width, 0));
 	}
 
 	private void createWall(Vec2 start, Vec2 end) {
