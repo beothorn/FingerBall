@@ -1,12 +1,12 @@
 package beothorn.fingerball;
 
 
-public class MetersToPixels {
+public class MetersToPixelsConverter {
 
 	private final float proportionX;
 	private final float proportionY;
 
-	public MetersToPixels(DimensionPixels pixels,DimensionMeters meters) {
+	public MetersToPixelsConverter(DimensionPixels pixels,DimensionMeters meters) {
 		proportionX = pixels.width / meters.width;
 		proportionY = pixels.height / meters.height;
 	}

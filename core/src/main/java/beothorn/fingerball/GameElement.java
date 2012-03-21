@@ -4,15 +4,15 @@ import org.jbox2d.common.Vec2;
 
 import playn.core.ImageLayer;
 
-public class ImageToBody {
+public class GameElement {
 
 	private final ImageLayer imageLayer;
 	private final PhysicBody physicBody;
-	private final MetersToPixels metersToPixelsConverter;
+	private final MetersToPixelsConverter metersToPixelsConverter;
 
-	public ImageToBody(ImageLayer imageLayerMock, PhysicBody physicBodyMock,MetersToPixels metersToPixelsConverter) {
-		this.imageLayer = imageLayerMock;
-		this.physicBody = physicBodyMock;
+	public GameElement(ImageLayer imageLayer, PhysicBody physicBody,MetersToPixelsConverter metersToPixelsConverter) {
+		this.imageLayer = imageLayer;
+		this.physicBody = physicBody;
 		this.metersToPixelsConverter = metersToPixelsConverter;
 	}
 

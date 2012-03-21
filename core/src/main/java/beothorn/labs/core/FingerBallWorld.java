@@ -11,21 +11,21 @@ import org.jbox2d.dynamics.World;
 import playn.core.Graphics;
 import beothorn.fingerball.DimensionMeters;
 import beothorn.fingerball.DimensionPixels;
-import beothorn.fingerball.MetersToPixels;
+import beothorn.fingerball.MetersToPixelsConverter;
 
 public class FingerBallWorld {
 
 	private static final DimensionMeters worldDimension = new DimensionMeters(2.31f,1.73f);
 	private static final Vec2 gravity = new Vec2(0.0f, 0.05f);
 	private World world;
-	private final MetersToPixels metersToPixels;
+	private final MetersToPixelsConverter metersToPixels;
 	private final Graphics graphics;
 	private Ball ball;
 
 	public FingerBallWorld() {
 		this.graphics = graphics();
 		DimensionPixels screenDimensions = new DimensionPixels(graphics.width(), graphics.height());
-		this.metersToPixels = new MetersToPixels(screenDimensions, worldDimension);
+		this.metersToPixels = new MetersToPixelsConverter(screenDimensions, worldDimension);
 		
 		createWorld();
 		createBoundaries();

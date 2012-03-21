@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import beothorn.fingerball.DimensionMeters;
 import beothorn.fingerball.DimensionPixels;
-import beothorn.fingerball.MetersToPixels;
+import beothorn.fingerball.MetersToPixelsConverter;
 import beothorn.fingerball.PointMeters;
 import beothorn.fingerball.PointPixels;
 
@@ -14,7 +14,7 @@ import beothorn.fingerball.PointPixels;
 public class MetersToPixelsTest {
 	DimensionPixels pixels = new DimensionPixels(800,320);
 	DimensionMeters meters = new DimensionMeters(2,3);
-	MetersToPixels subject = new MetersToPixels(pixels, meters);
+	MetersToPixelsConverter subject = new MetersToPixelsConverter(pixels, meters);
 	
 	@Test
 	public void pixelsToMeters_ShouldTransform(){
