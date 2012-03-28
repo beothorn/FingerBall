@@ -10,30 +10,18 @@ public class BallTest {
 
 	@Test
 	public void onClickBall_WillUPdatePhysicsBall(){
-		InputMock input = new InputMock();
-		PhysiscalBallMock physicalBall = new PhysiscalBallMock();
-		DimensionPixels pixels = new DimensionPixels(100, 100);
-		DimensionMeters meters = new DimensionMeters(1, 1);
-		MetersToPixelsConverter metersToPixelsConverter = new MetersToPixelsConverter(pixels, meters);
-		new Ball(physicalBall, input, metersToPixelsConverter);
-		PointPixels kick = new PointPixels(1,1);
-		input.simulateKick(kick);
-		Assert.assertEquals("Kicked at (0.01m,0.01m)", physicalBall.getOperations());
+		simulateClickAt(new PointPixels(5,5));
+		Assert.assertEquals("Kicked at (0.05m,0.05m)", getPhysicalBallOperations());
 	}
-//		
-//	}
-//	
-//	public void onClickOUtsideBall_WillDoNothing(){
-//		Input input = new InputMock();
-//		PhysiscalBall physicalBall = new PhysiscalBallMock(); 
-//		Ball ball = new Ball(physicalBall, input);
-//		
-//		Point outsideBall = new Point(5,5);
-//		input.simulateKick(outsideBall);
-//		
-//		String nop = "";
-//		Assert.assertEquals(nop, physicalBall.getOperations());
-//	}
+	
+	@Test
+	public void onClickOutsideBall_WillDoNothing(){
+		simulateClickAt(new PointPixels(50,50));
+		String none = "";
+		Assert.assertEquals(none, getPhysicalBallOperations());
+	}
+	
+
 //	
 //	public void onClickAndHoldBall_WillUPdatePhysicsBall(){
 //		Input input = new InputMock();
@@ -54,8 +42,23 @@ public class BallTest {
 //		Ball ball = new Ball(physicalBall, input);
 //		
 //	}
+	PhysiscalBallMock physicalBall = new PhysiscalBallMock();
+
+	private void simulateClickAt(PointPixels kick) {
+		InputMock input = new InputMock();
+		DimensionPixels pixels = new DimensionPixels(100, 100);
+		DimensionMeters meters = new DimensionMeters(1, 1);
+		MetersToPixelsConverter metersToPixelsConverter = new MetersToPixelsConverter(pixels, meters);
+		PointPixels pointPixels = new PointPixels(0, 0);
+		DimensionPixels dimensionPixels = new DimensionPixels(10, 10);
+		GraphicsBallMock graphicsBallMock = new GraphicsBallMock(pointPixels,dimensionPixels);
+		new Ball(physicalBall, graphicsBallMock, input, metersToPixelsConverter);
+		input.simulateKick(kick);
+	}
 	
-	
+	private String getPhysicalBallOperations() {
+		return physicalBall.getOperations();
+	}
 }
 
 

@@ -18,11 +18,12 @@ import playn.core.ImageLayer;
 import playn.core.Pointer;
 import playn.core.ResourceCallback;
 import beothorn.fingerball.GameElement;
+import beothorn.fingerball.GraphicsBall;
 import beothorn.fingerball.Input;
 import beothorn.fingerball.InputListener;
 import beothorn.fingerball.MetersToPixelsConverter;
-import beothorn.fingerball.PhysicalBody;
 import beothorn.fingerball.PhysicBodyImpl;
+import beothorn.fingerball.PhysicalBody;
 import beothorn.fingerball.PhysiscalBall;
 import beothorn.fingerball.PointMeters;
 import beothorn.fingerball.PointPixels;
@@ -33,11 +34,14 @@ public class Ball {
 
 	private GameElement gameElement;
 	
-	public Ball(final PhysiscalBall physicalBall, Input input, final MetersToPixelsConverter metersToPixelsConverter) {
+	public Ball(final PhysiscalBall physicalBall,final GraphicsBall graphicsBall, Input input, final MetersToPixelsConverter metersToPixelsConverter) {
 		input.setListener(new InputListener() {
-			
 			@Override
 			public void kickAt(PointPixels kick) {
+				RectanglePixels rectangle =  graphicsBall.getRectangle();
+				if(!rectangle.contains(kick)){
+					return;
+				}
 				PointMeters kickPhysical = metersToPixelsConverter.pixelsToMeters(kick);
 				physicalBall.kickAt(kickPhysical);
 			}
