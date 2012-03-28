@@ -2,9 +2,9 @@ package beothorn.fingerball.mock;
 
 import org.jbox2d.common.Vec2;
 
-import beothorn.fingerball.PhysicBody;
+import beothorn.fingerball.PhysicalBody;
 
-public class PhysicBodyMock implements PhysicBody {
+public class PhysicBodyMock implements PhysicalBody {
 
 	private Vec2 position;
 

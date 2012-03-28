@@ -7,12 +7,12 @@ import org.junit.Test;
 import beothorn.fingerball.mock.ImageLayerMock;
 import beothorn.fingerball.mock.PhysicBodyMock;
 
-public class ImageToBodyTest {
+public class GameElementTest {
 
 	@Test
-	public void testImageToBody(){
+	public void testGameElementPosition(){
 		ImageLayerMock imageLayerMock = new ImageLayerMock();
-		PhysicBody physicBodyMock = new PhysicBodyMock(1.5f, 1.5f);
+		PhysicalBody physicBodyMock = new PhysicBodyMock(1.5f, 1.5f);
 		DimensionMeters worldDimensions = new DimensionMeters(3, 3);
 		DimensionPixels screenDimensions = new DimensionPixels(800, 600);
 		MetersToPixelsConverter metersToPixelsConverter = new MetersToPixelsConverter(screenDimensions, worldDimensions);

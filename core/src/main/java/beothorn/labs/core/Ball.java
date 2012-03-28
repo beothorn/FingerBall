@@ -18,9 +18,12 @@ import playn.core.ImageLayer;
 import playn.core.Pointer;
 import playn.core.ResourceCallback;
 import beothorn.fingerball.GameElement;
+import beothorn.fingerball.Input;
+import beothorn.fingerball.InputListener;
 import beothorn.fingerball.MetersToPixelsConverter;
-import beothorn.fingerball.PhysicBody;
+import beothorn.fingerball.PhysicalBody;
 import beothorn.fingerball.PhysicBodyImpl;
+import beothorn.fingerball.PhysiscalBall;
 import beothorn.fingerball.PointMeters;
 import beothorn.fingerball.PointPixels;
 
@@ -28,7 +31,18 @@ public class Ball {
 
 	public static String IMAGE = "images/soccerBall.png";
 
-	private GameElement imageToBody;
+	private GameElement gameElement;
+	
+	public Ball(final PhysiscalBall physicalBall, Input input, final MetersToPixelsConverter metersToPixelsConverter) {
+		input.setListener(new InputListener() {
+			
+			@Override
+			public void kickAt(PointPixels kick) {
+				PointMeters kickPhysical = metersToPixelsConverter.pixelsToMeters(kick);
+				physicalBall.kickAt(kickPhysical);
+			}
+		});
+	}
 
 	public Ball(final World world,
 			final MetersToPixelsConverter metersToPixelsConverter,
@@ -38,31 +52,26 @@ public class Ball {
 		image.addCallback(new ResourceCallback<Image>() {
 			@Override
 			public void done(Image image) {
-				final ImageLayer ballImageLayer = graphics().createImageLayer(image);
-				float radius = image.width() / 2f;
-				ballImageLayer.setOrigin(radius, radius);
-				graphics().rootLayer().add(ballImageLayer);
-				PointMeters radiusInMeters = metersToPixelsConverter.pixelsToMeters(new PointPixels((int) radius,(int) radius));
-				final PhysicBody ballBody = createBallBody(world, x, y,radiusInMeters);
-				imageToBody = new GameElement(ballImageLayer, ballBody,metersToPixelsConverter);
-				pointer().setListener(new Pointer.Adapter() {
-					@Override
-					public void onPointerStart(Pointer.Event event) {
-						PointPixels clickPosition = new PointPixels((int) event
-								.x(), (int) event.y());
-						PointMeters pixelsToMeters = metersToPixelsConverter
-								.pixelsToMeters(clickPosition);
+				
+				float imageRadius = image.width() / 2f;
+				
+				final ImageLayer ballImageLayer = createImageLayer(image);
+				
+				PointMeters radiusInMeters = metersToPixelsConverter.pixelsToMeters(new PointPixels((int) imageRadius,(int) imageRadius));
+				final PhysicalBody ballBody = createPhysicalBody(world, x, y,radiusInMeters);
+				
+				gameElement = new GameElement(ballImageLayer, ballBody, metersToPixelsConverter);
+				pointer().setListener(new Pointer.Adapter() {@Override public void onPointerStart(Pointer.Event event) {
+						PointPixels clickPosition = new PointPixels((int) event.x(), (int) event.y());
+						gameElement.click(clickPosition);
+				}});				
+			}
 
-						float deltaX = imageToBody.getPhisicalX()
-								- pixelsToMeters.x;
-						Vec2 impulse = new Vec2(deltaX, imageToBody
-								.getPhisicalY() - pixelsToMeters.y);
-						impulse.normalize();
-						Vec2 impulseForce = impulse.mul(0.006f);
-						ballBody.applyLinearImpulse(impulseForce);
-						ballBody.applyAngularImpulse(impulseForce.x * 0.1f);
-					}
-				});
+			private ImageLayer createImageLayer(Image image) {
+				final ImageLayer ballImageLayer = graphics().createImageLayer(image);
+				ballImageLayer.setOrigin(image.width() / 2f, image.width() / 2f);
+				graphics().rootLayer().add(ballImageLayer);
+				return ballImageLayer;
 			}
 
 			@Override
@@ -70,7 +79,7 @@ public class Ball {
 				log().error("Error loading image!", err);
 			}
 
-			private PhysicBody createBallBody(World world, float x, float y,
+			private PhysicalBody createPhysicalBody(World world, float x, float y,
 					PointMeters radiusInMeters) {
 				Body body = createBody(world);
 				FixtureDef fixtureDef = createBallFixture(radiusInMeters.x);
@@ -105,6 +114,6 @@ public class Ball {
 	}
 
 	public void update() {
-		imageToBody.update();
+		gameElement.update();
 	}
 }

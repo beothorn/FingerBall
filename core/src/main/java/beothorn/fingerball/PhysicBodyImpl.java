@@ -3,7 +3,7 @@ package beothorn.fingerball;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 
-public class PhysicBodyImpl implements PhysicBody{
+public class PhysicBodyImpl implements PhysicalBody{
 
 	private final Body body;
 
