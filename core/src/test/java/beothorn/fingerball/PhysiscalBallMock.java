@@ -34,14 +34,4 @@ class PhysiscalBallMock implements PhysiscalBall {
 		return rotation;
 	}
 
-	@Override
-	public void applyLinearImpulse(Vec2 impulseForce) {
-		throw new RuntimeException("NOT IMPLEMENTED");
-	}
-
-	@Override
-	public void applyAngularImpulse(float f) {
-		throw new RuntimeException("NOT IMPLEMENTED");
-	}
-
 }
