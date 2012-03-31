@@ -6,7 +6,6 @@ import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
-import org.jbox2d.dynamics.World;
 
 import beothorn.fingerball.units.PointMeters;
 
@@ -14,7 +13,7 @@ public class PhysicalBallImpl implements PhysiscalBall {
 
 	private Body body;
 
-	public PhysicalBallImpl(World world, float radius, float x, float y) {
+	public PhysicalBallImpl(FingerBallWorld world, float radius, float x, float y) {
 		body = createBody(world);
 		FixtureDef fixtureDef = createBallFixture(radius);
 
@@ -24,7 +23,7 @@ public class PhysicalBallImpl implements PhysiscalBall {
 		body.setLinearDamping(0.3f);
 	}
 	
-	private Body createBody(World world) {
+	private Body createBody(FingerBallWorld world) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DYNAMIC;
 		Body body = world.createBody(bodyDef);
