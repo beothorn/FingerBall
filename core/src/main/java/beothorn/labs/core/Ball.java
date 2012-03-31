@@ -17,7 +17,7 @@ import playn.core.Image;
 import playn.core.ImageLayer;
 import playn.core.Pointer;
 import playn.core.ResourceCallback;
-import beothorn.fingerball.GameElement;
+import beothorn.fingerball.PhysicalToGraphicsBallUpdater;
 import beothorn.fingerball.GraphicsBall;
 import beothorn.fingerball.Input;
 import beothorn.fingerball.InputListener;
@@ -32,9 +32,16 @@ public class Ball {
 
 	public static String IMAGE = "images/soccerBall.png";
 
-	private GameElement gameElement;
+	private PhysiscalBall physicalBall;
+
+	private GraphicsBall graphicsBall;
+
+	private MetersToPixelsConverter metersToPixelsConverter;
 	
 	public Ball(final PhysiscalBall physicalBall,final GraphicsBall graphicsBall, Input input, final MetersToPixelsConverter metersToPixelsConverter) {
+		this.physicalBall = physicalBall;
+		this.graphicsBall = graphicsBall;
+		this.metersToPixelsConverter = metersToPixelsConverter;
 		input.setListener(new InputListener() {
 			@Override
 			public void kickAt(PointPixels kick) {
@@ -63,12 +70,7 @@ public class Ball {
 				
 				PointMeters radiusInMeters = metersToPixelsConverter.pixelsToMeters(new PointPixels((int) imageRadius,(int) imageRadius));
 				final PhysicalBody ballBody = createPhysicalBody(world, x, y,radiusInMeters);
-				
-				gameElement = new GameElement(ballImageLayer, ballBody, metersToPixelsConverter);
-				pointer().setListener(new Pointer.Adapter() {@Override public void onPointerStart(Pointer.Event event) {
-						PointPixels clickPosition = new PointPixels((int) event.x(), (int) event.y());
-						gameElement.click(clickPosition);
-				}});				
+								
 			}
 
 			private ImageLayer createImageLayer(Image image) {
@@ -118,6 +120,16 @@ public class Ball {
 	}
 
 	public void update() {
-		gameElement.update();
+		propagatePhycicalChangesToGraphics();
+	}
+
+	private void propagatePhycicalChangesToGraphics() {
+		Vec2 position = physicalBall.getPosition();
+		PointMeters bodyPosition = new PointMeters(position.x, position.y);
+		graphicsBall.setRotation(physicalBall.getAngle());
+		PointPixels pixelPosition = metersToPixelsConverter.metersToPixels(bodyPosition);
+		int x = pixelPosition.x;
+		int y = pixelPosition.y;
+		graphicsBall.setLocation(x, y);
 	}
 }
