@@ -4,8 +4,12 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import beothorn.labs.core.Ball;
-import beothorn.labs.core.RectanglePixels;
+import beothorn.fingerball.units.DimensionMeters;
+import beothorn.fingerball.units.DimensionPixels;
+import beothorn.fingerball.units.MetersToPixelsConverter;
+import beothorn.fingerball.units.PointMeters;
+import beothorn.fingerball.units.PointPixels;
+import beothorn.fingerball.units.RectanglePixels;
 
 public class BallTest {
 

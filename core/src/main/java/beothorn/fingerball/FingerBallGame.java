@@ -1,13 +1,14 @@
-package beothorn.labs.core;
+package beothorn.fingerball;
 
 import static playn.core.PlayN.assets;
 import static playn.core.PlayN.graphics;
 import playn.core.Game;
 import playn.core.Image;
 import playn.core.ImageLayer;
-import beothorn.fingerball.DimensionPixels;
+import beothorn.fingerball.physics.FingerBallWorld;
+import beothorn.fingerball.units.DimensionPixels;
 
-public class FingerBall implements Game {
+public class FingerBallGame implements Game {
 	private FingerBallWorld world;
 	private static final DimensionPixels screenDimensions = new DimensionPixels(800, 600);
 

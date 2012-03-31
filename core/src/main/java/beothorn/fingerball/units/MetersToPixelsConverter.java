@@ -1,4 +1,5 @@
-package beothorn.fingerball;
+package beothorn.fingerball.units;
+
 
 
 public class MetersToPixelsConverter {

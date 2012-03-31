@@ -1,4 +1,4 @@
-package beothorn.fingerball;
+package beothorn.fingerball.units;
 import pythagoras.f.Point;
 
 

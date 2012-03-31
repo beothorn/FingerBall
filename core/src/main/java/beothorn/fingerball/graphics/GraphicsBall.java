@@ -1,6 +1,6 @@
-package beothorn.fingerball;
+package beothorn.fingerball.graphics;
 
-import beothorn.labs.core.RectanglePixels;
+import beothorn.fingerball.units.RectanglePixels;
 
 public interface GraphicsBall {
 

@@ -2,6 +2,9 @@ package beothorn.fingerball;
 
 import org.jbox2d.common.Vec2;
 
+import beothorn.fingerball.physics.PhysiscalBall;
+import beothorn.fingerball.units.PointMeters;
+
 class PhysiscalBallMock implements PhysiscalBall {
 
 	String operations = "";

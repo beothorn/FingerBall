@@ -1,4 +1,4 @@
-package beothorn.labs.core;
+package beothorn.fingerball.physics;
 
 import static playn.core.PlayN.graphics;
 
@@ -9,9 +9,10 @@ import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.World;
 
 import playn.core.Graphics;
-import beothorn.fingerball.DimensionMeters;
-import beothorn.fingerball.DimensionPixels;
-import beothorn.fingerball.MetersToPixelsConverter;
+import beothorn.fingerball.Ball;
+import beothorn.fingerball.units.DimensionMeters;
+import beothorn.fingerball.units.DimensionPixels;
+import beothorn.fingerball.units.MetersToPixelsConverter;
 
 public class FingerBallWorld {
 

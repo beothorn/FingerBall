@@ -1,6 +1,8 @@
-package beothorn.fingerball;
+package beothorn.fingerball.physics;
 
 import org.jbox2d.common.Vec2;
+
+import beothorn.fingerball.units.PointMeters;
 
 public interface PhysiscalBall {
 

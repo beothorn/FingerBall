@@ -1,9 +1,8 @@
-package beothorn.labs.core;
+package beothorn.fingerball.units;
 
-import beothorn.fingerball.DimensionPixels;
-import beothorn.fingerball.PointPixels;
 import pythagoras.i.Rectangle;
 
+@SuppressWarnings("serial")
 public class RectanglePixels extends Rectangle{
 
 	public RectanglePixels(PointPixels pointPixels,DimensionPixels dimensionPixels) {

@@ -1,9 +1,8 @@
-package beothorn.labs.core;
+package beothorn.fingerball;
 
 import static playn.core.PlayN.assets;
 import static playn.core.PlayN.graphics;
 import static playn.core.PlayN.log;
-import static playn.core.PlayN.pointer;
 
 import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.common.Vec2;
@@ -15,18 +14,15 @@ import org.jbox2d.dynamics.World;
 
 import playn.core.Image;
 import playn.core.ImageLayer;
-import playn.core.Pointer;
 import playn.core.ResourceCallback;
-import beothorn.fingerball.PhysicalToGraphicsBallUpdater;
-import beothorn.fingerball.GraphicsBall;
-import beothorn.fingerball.Input;
-import beothorn.fingerball.InputListener;
-import beothorn.fingerball.MetersToPixelsConverter;
-import beothorn.fingerball.PhysicBodyImpl;
-import beothorn.fingerball.PhysicalBody;
-import beothorn.fingerball.PhysiscalBall;
-import beothorn.fingerball.PointMeters;
-import beothorn.fingerball.PointPixels;
+import beothorn.fingerball.graphics.GraphicsBall;
+import beothorn.fingerball.physics.PhysicBodyImpl;
+import beothorn.fingerball.physics.PhysicalBody;
+import beothorn.fingerball.physics.PhysiscalBall;
+import beothorn.fingerball.units.MetersToPixelsConverter;
+import beothorn.fingerball.units.PointMeters;
+import beothorn.fingerball.units.PointPixels;
+import beothorn.fingerball.units.RectanglePixels;
 
 public class Ball {
 
