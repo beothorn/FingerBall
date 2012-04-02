@@ -3,8 +3,7 @@ package beothorn.labs.html;
 import playn.core.PlayN;
 import playn.html.HtmlGame;
 import playn.html.HtmlPlatform;
-
-import beothorn.labs.core.FingerBall;
+import beothorn.fingerball.FingerBallGame;
 
 public class FingerBallHtml extends HtmlGame {
 
@@ -12,6 +11,6 @@ public class FingerBallHtml extends HtmlGame {
   public void start() {
     HtmlPlatform platform = HtmlPlatform.register();
     platform.assets().setPathPrefix("fingerBall/");
-    PlayN.run(new FingerBall());
+    PlayN.run(new FingerBallGame());
   }
 }
