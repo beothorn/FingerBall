@@ -6,7 +6,8 @@ import playn.core.Pointer.Event;
 
 public class BallPointerListener implements Pointer.Listener{
 
-	private static final double LONG_KICK_PRESS_INTERVAL = 200;
+	private static final double LONG_KICK_MIN_PRESS_INTERVAL = 200;
+	private static final double LONG_KICK_MAX_PRESS_INTERVAL = 400;
 	
 	private double pointerStart;
 	private final InputListener inputListener;
@@ -25,7 +26,8 @@ public class BallPointerListener implements Pointer.Listener{
 	@Override
 	public void onPointerEnd(Event event) {
 		double pointerEnd = event.time();
-		if(pointerEnd - pointerStart > LONG_KICK_PRESS_INTERVAL){
+		double delta = pointerEnd - pointerStart;
+		if(delta >= LONG_KICK_MIN_PRESS_INTERVAL && delta <= LONG_KICK_MAX_PRESS_INTERVAL){
 			PointPixels kick = new PointPixels((int)event.x(), (int)event.y());
 			inputListener.longKickAt(kick);
 		}
