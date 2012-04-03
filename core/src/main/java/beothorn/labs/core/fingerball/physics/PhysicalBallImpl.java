@@ -7,6 +7,8 @@ import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
 
+import pythagoras.f.MathUtil;
+
 import beothorn.labs.core.fingerball.units.PointMeters;
 
 public class PhysicalBallImpl implements PhysiscalBall {
@@ -21,7 +23,6 @@ public class PhysicalBallImpl implements PhysiscalBall {
 
 		body.createFixture(fixtureDef);
 		body.setTransform(new Vec2(x, y), 0);
-
 		body.setLinearDamping(0.3f);
 	}
 	
@@ -68,10 +69,11 @@ public class PhysicalBallImpl implements PhysiscalBall {
 	private void kickAt(PointMeters kickPhysical, float kickForceMultiplier) {
 		Vec2 position = body.getPosition();
 		float deltaX = position.x - kickPhysical.x;
-		Vec2 impulse = new Vec2(deltaX, position.y - kickPhysical.y);
+		float deltaY = -Math.abs(position.y - kickPhysical.y);
+		Vec2 impulse = new Vec2(deltaX, deltaY);
 		impulse.normalize();
 		Vec2 impulseForce = impulse.mul(kickForceMultiplier);
 		body.applyLinearImpulse(impulseForce,position);
-		body.applyAngularImpulse(impulseForce.x * 0.1f);
+		body.applyAngularImpulse(impulseForce.x * 0.01f);
 	}
 }
