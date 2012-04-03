@@ -2,6 +2,7 @@ package beothorn.fingerball;
 
 import junit.framework.Assert;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import beothorn.labs.core.fingerball.Ball;
@@ -19,6 +20,13 @@ public class BallTest {
 		simulateClickAt(new PointPixels(5,5));
 		Assert.assertEquals("Kicked at (0.05m,0.05m)", getPhysicalBallOperations());
 	}
+
+	@Test
+	public void onLongClickBall_WillUpdatePhysicsBall(){
+		simulateLongClickAt(new PointPixels(5,5));
+		Assert.assertEquals("Kicked at (0.05m,0.05m)\nKick force increased", getPhysicalBallOperations());
+	}
+	
 
 	@Test
 	public void onClickOutsideBall_WillDoNothing(){
@@ -47,30 +55,12 @@ public class BallTest {
 		RectanglePixels graphicsBallRectangle = graphicsBall.getRectangle();
 		Assert.assertEquals("5,5", graphicsBallRectangle.x+","+graphicsBallRectangle.y);
 	}
-	
-
-//		Input input = new InputMock();
-//		PhysiscalBall physicalBall = new PhysiscalBallMock(); 
-//		Ball ball = new Ball(physicalBall, input);
-//		
-//		PointPixels kick = new PointPixels(1,1);
-//		input.simulateLongKick(kick);
-//		
-//		Assert.assertEquals(
-//				"Kicked at 0.2,0.15 meters\n" +
-//				"Kick force increased", physicalBall.getOperations());
-//	}
-//	
-//	public void onPhysicalBallUpdate_MustUpdateGraphicsBall(){
-//		PhysiscalBallMock physicalBall = new PhysiscalBallMock();
-//		physicalBall.simulateUpdatePositionTo(1,1);
-//		Ball ball = new Ball(physicalBall, input);
-//		
-//	}
 
 	PhysiscalBallMock physicalBall = new PhysiscalBallMock();
 	InputMock input = new InputMock();
-	private void simulateClickAt(PointPixels kick) {
+
+	@Before
+	public void setupBall() {
 		PointPixels pointPixels = new PointPixels(0, 0);
 		DimensionPixels dimensionPixels = new DimensionPixels(10, 10);
 		GraphicsBallMock graphicsBall = new GraphicsBallMock(pointPixels,dimensionPixels);
@@ -78,6 +68,13 @@ public class BallTest {
 		DimensionMeters meters = new DimensionMeters(1, 1);
 		MetersToPixelsConverter metersToPixelsConverter = new MetersToPixelsConverter(pixels, meters);
 		new Ball(physicalBall, graphicsBall, input, metersToPixelsConverter);
+	}
+	
+	private void simulateLongClickAt(PointPixels kick) {
+		input.simulateLongKick(kick);
+	}
+	
+	private void simulateClickAt(PointPixels kick) {
 		input.simulateKick(kick);
 	}
 	

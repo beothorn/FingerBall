@@ -34,4 +34,9 @@ class PhysiscalBallMock implements PhysiscalBall {
 		return rotation;
 	}
 
+	@Override
+	public void longKickAt(PointMeters kickPhysical) {
+		operations += "\nKick force increased";
+	}
+
 }

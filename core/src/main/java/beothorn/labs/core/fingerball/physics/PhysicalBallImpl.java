@@ -64,4 +64,9 @@ public class PhysicalBallImpl implements PhysiscalBall {
 		return body.getAngle();
 	}
 
+	@Override
+	public void longKickAt(PointMeters kickPhysical) {
+		throw new RuntimeException("NOT IMPLEMENTED");
+	}
+
 }

@@ -22,12 +22,26 @@ public class Ball {
 		input.setListener(new InputListener() {
 			@Override
 			public void kickAt(PointPixels kick) {
-				RectanglePixels rectangle =  graphicsBall.getRectangle();
-				if(!rectangle.contains(kick)){
+				if(!isPointInsideBall(graphicsBall,kick)){
 					return;
 				}
 				PointMeters kickPhysical = metersToPixelsConverter.pixelsToMeters(kick);
 				physicalBall.kickAt(kickPhysical);
+			}
+
+			private boolean isPointInsideBall(final GraphicsBall graphicsBall,PointPixels kick) {
+				RectanglePixels rectangle =  graphicsBall.getRectangle();
+				boolean pointIsNotInsideBall = rectangle.contains(kick);
+				return pointIsNotInsideBall;
+			}
+
+			@Override
+			public void longKickAt(PointPixels kick) {
+				if(!isPointInsideBall(graphicsBall,kick)){
+					return;
+				}
+				PointMeters kickPhysical = metersToPixelsConverter.pixelsToMeters(kick);
+				physicalBall.longKickAt(kickPhysical);
 			}
 		});
 	}

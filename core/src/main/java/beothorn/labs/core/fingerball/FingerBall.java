@@ -8,9 +8,7 @@ import playn.core.Game;
 import playn.core.Graphics;
 import playn.core.Image;
 import playn.core.ImageLayer;
-import playn.core.Pointer;
 import playn.core.ResourceCallback;
-import playn.core.Pointer.Event;
 import beothorn.labs.core.fingerball.graphics.GraphicsBallImpl;
 import beothorn.labs.core.fingerball.physics.FingerBallWorld;
 import beothorn.labs.core.fingerball.physics.PhysicalBallImpl;
@@ -28,6 +26,7 @@ public class FingerBall implements Game {
 	private static final DimensionMeters worldDimension = new DimensionMeters(2.31f,1.73f);
 	private static final String BACKGROUND_IMAGE = "images/background.png";
 	private static final String BALL_IMAGE = "images/soccerBall.png";
+	
 	private Ball ball;
 
 	@Override
@@ -55,23 +54,12 @@ public class FingerBall implements Game {
 				
 				GraphicsBallImpl graphicsBall = new GraphicsBallImpl(image);
 				
-				Input input = new Input(){@Override	public void setListener(final InputListener inputListener) { pointer().setListener(new Pointer.Listener() {
-							
-					@Override
-					public void onPointerStart(Event event) {
-						PointPixels kick = new PointPixels((int)event.x(), (int)event.y());
-						inputListener.kickAt(kick);
+				Input input = new Input(){
+					@Override	
+					public void setListener(final InputListener inputListener) { 
+						pointer().setListener(new BallPointerListener(inputListener));
 					}
-							
-					@Override
-					public void onPointerEnd(Event event) {
-					}
-							
-					@Override
-					public void onPointerDrag(Event event) {
-					}
-					
-				});}};
+				};
 				
 				ball = new Ball(physicalBall,graphicsBall,input,metersToPixels);
 			}

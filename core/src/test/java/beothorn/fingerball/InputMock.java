@@ -17,4 +17,9 @@ class InputMock implements Input {
 		this.inputListener = inputListener;
 	}
 
+	public void simulateLongKick(PointPixels kick) {
+		inputListener.kickAt(kick);
+		inputListener.longKickAt(kick);
+	}
+
 }
