@@ -2,8 +2,8 @@ package beothorn.fingerball;
 
 import org.jbox2d.common.Vec2;
 
-import beothorn.fingerball.physics.PhysiscalBall;
-import beothorn.fingerball.units.PointMeters;
+import beothorn.labs.core.fingerball.physics.PhysiscalBall;
+import beothorn.labs.core.fingerball.units.PointMeters;
 
 class PhysiscalBallMock implements PhysiscalBall {
 

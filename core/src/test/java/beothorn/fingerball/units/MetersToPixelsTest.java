@@ -4,11 +4,11 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import beothorn.fingerball.units.DimensionMeters;
-import beothorn.fingerball.units.DimensionPixels;
-import beothorn.fingerball.units.MetersToPixelsConverter;
-import beothorn.fingerball.units.PointMeters;
-import beothorn.fingerball.units.PointPixels;
+import beothorn.labs.core.fingerball.units.DimensionMeters;
+import beothorn.labs.core.fingerball.units.DimensionPixels;
+import beothorn.labs.core.fingerball.units.MetersToPixelsConverter;
+import beothorn.labs.core.fingerball.units.PointMeters;
+import beothorn.labs.core.fingerball.units.PointPixels;
 
 
 public class MetersToPixelsTest {

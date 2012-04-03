@@ -1,9 +1,9 @@
 package beothorn.fingerball;
 
-import beothorn.fingerball.graphics.GraphicsBall;
-import beothorn.fingerball.units.DimensionPixels;
-import beothorn.fingerball.units.PointPixels;
-import beothorn.fingerball.units.RectanglePixels;
+import beothorn.labs.core.fingerball.graphics.GraphicsBall;
+import beothorn.labs.core.fingerball.units.DimensionPixels;
+import beothorn.labs.core.fingerball.units.PointPixels;
+import beothorn.labs.core.fingerball.units.RectanglePixels;
 
 class GraphicsBallMock implements GraphicsBall {
 

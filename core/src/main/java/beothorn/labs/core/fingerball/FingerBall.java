@@ -1,4 +1,4 @@
-package beothorn.fingerball;
+package beothorn.labs.core.fingerball;
 
 import static playn.core.PlayN.assets;
 import static playn.core.PlayN.graphics;
@@ -11,16 +11,16 @@ import playn.core.ImageLayer;
 import playn.core.Pointer;
 import playn.core.ResourceCallback;
 import playn.core.Pointer.Event;
-import beothorn.fingerball.graphics.GraphicsBallImpl;
-import beothorn.fingerball.physics.FingerBallWorld;
-import beothorn.fingerball.physics.PhysicalBallImpl;
-import beothorn.fingerball.units.DimensionMeters;
-import beothorn.fingerball.units.DimensionPixels;
-import beothorn.fingerball.units.MetersToPixelsConverter;
-import beothorn.fingerball.units.PointMeters;
-import beothorn.fingerball.units.PointPixels;
+import beothorn.labs.core.fingerball.graphics.GraphicsBallImpl;
+import beothorn.labs.core.fingerball.physics.FingerBallWorld;
+import beothorn.labs.core.fingerball.physics.PhysicalBallImpl;
+import beothorn.labs.core.fingerball.units.DimensionMeters;
+import beothorn.labs.core.fingerball.units.DimensionPixels;
+import beothorn.labs.core.fingerball.units.MetersToPixelsConverter;
+import beothorn.labs.core.fingerball.units.PointMeters;
+import beothorn.labs.core.fingerball.units.PointPixels;
 
-public class FingerBallGame implements Game {
+public class FingerBall implements Game {
 	
 	private FingerBallWorld world;
 	private MetersToPixelsConverter metersToPixels;

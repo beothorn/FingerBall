@@ -1,6 +1,8 @@
 package beothorn.fingerball;
 
-import beothorn.fingerball.units.PointPixels;
+import beothorn.labs.core.fingerball.Input;
+import beothorn.labs.core.fingerball.InputListener;
+import beothorn.labs.core.fingerball.units.PointPixels;
 
 class InputMock implements Input {
 

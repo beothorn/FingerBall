@@ -1,4 +1,4 @@
-package beothorn.fingerball.physics;
+package beothorn.labs.core.fingerball.physics;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;

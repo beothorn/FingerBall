@@ -1,4 +1,4 @@
-package beothorn.fingerball.physics;
+package beothorn.labs.core.fingerball.physics;
 
 import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.common.Vec2;
@@ -7,7 +7,7 @@ import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
 
-import beothorn.fingerball.units.PointMeters;
+import beothorn.labs.core.fingerball.units.PointMeters;
 
 public class PhysicalBallImpl implements PhysiscalBall {
 

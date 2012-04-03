@@ -1,13 +1,13 @@
-package beothorn.fingerball;
+package beothorn.labs.core.fingerball;
 
 import org.jbox2d.common.Vec2;
 
-import beothorn.fingerball.graphics.GraphicsBall;
-import beothorn.fingerball.physics.PhysiscalBall;
-import beothorn.fingerball.units.MetersToPixelsConverter;
-import beothorn.fingerball.units.PointMeters;
-import beothorn.fingerball.units.PointPixels;
-import beothorn.fingerball.units.RectanglePixels;
+import beothorn.labs.core.fingerball.graphics.GraphicsBall;
+import beothorn.labs.core.fingerball.physics.PhysiscalBall;
+import beothorn.labs.core.fingerball.units.MetersToPixelsConverter;
+import beothorn.labs.core.fingerball.units.PointMeters;
+import beothorn.labs.core.fingerball.units.PointPixels;
+import beothorn.labs.core.fingerball.units.RectanglePixels;
 
 public class Ball {
 	

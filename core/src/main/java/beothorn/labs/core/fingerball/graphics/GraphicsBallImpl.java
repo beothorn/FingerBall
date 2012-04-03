@@ -1,11 +1,11 @@
-package beothorn.fingerball.graphics;
+package beothorn.labs.core.fingerball.graphics;
 
 import static playn.core.PlayN.graphics;
 import playn.core.Image;
 import playn.core.ImageLayer;
-import beothorn.fingerball.units.DimensionPixels;
-import beothorn.fingerball.units.PointPixels;
-import beothorn.fingerball.units.RectanglePixels;
+import beothorn.labs.core.fingerball.units.DimensionPixels;
+import beothorn.labs.core.fingerball.units.PointPixels;
+import beothorn.labs.core.fingerball.units.RectanglePixels;
 
 public class GraphicsBallImpl implements GraphicsBall {
 
