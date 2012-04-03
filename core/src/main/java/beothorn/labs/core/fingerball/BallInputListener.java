@@ -7,7 +7,7 @@ import beothorn.labs.core.fingerball.units.PointMeters;
 import beothorn.labs.core.fingerball.units.PointPixels;
 import beothorn.labs.core.fingerball.units.RectanglePixels;
 
-final class BallInputListener implements InputListener {
+public class BallInputListener implements InputListener {
 	private final MetersToPixelsConverter metersToPixelsConverter;
 	private final PhysiscalBall physicalBall;
 	private final GraphicsBall graphicsBall;
@@ -20,7 +20,7 @@ final class BallInputListener implements InputListener {
 
 	@Override
 	public void kickAt(PointPixels kick) {
-		if(!isPointInsideBall(graphicsBall,kick)){
+		if(!isPointInsideBall(kick)){
 			return;
 		}
 		PointMeters kickPhysical = metersToPixelsConverter.pixelsToMeters(kick);
@@ -29,14 +29,11 @@ final class BallInputListener implements InputListener {
 
 	@Override
 	public void longKickAt(PointPixels kick) {
-		if(!isPointInsideBall(graphicsBall,kick)){
-			return;
-		}
 		PointMeters kickPhysical = metersToPixelsConverter.pixelsToMeters(kick);
 		physicalBall.longKickAt(kickPhysical);
 	}
 
-	private boolean isPointInsideBall(final GraphicsBall graphicsBall,PointPixels kick) {
+	private boolean isPointInsideBall(PointPixels kick) {
 		RectanglePixels rectangle =  graphicsBall.getRectangle();
 		boolean pointIsNotInsideBall = rectangle.contains(kick);
 		return pointIsNotInsideBall;

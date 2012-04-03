@@ -11,6 +11,8 @@ import beothorn.labs.core.fingerball.units.PointMeters;
 
 public class PhysicalBallImpl implements PhysiscalBall {
 
+	private static final float NORMAL_KICK_MULTIPLIER = 0.006f;
+	private static final float LONG_KICK_MULTIPLIER = 0.002f;
 	private Body body;
 
 	public PhysicalBallImpl(FingerBallWorld world, float radius, float x, float y) {
@@ -50,23 +52,26 @@ public class PhysicalBallImpl implements PhysiscalBall {
 
 	@Override
 	public void kickAt(PointMeters kickPhysical) {
-		Vec2 position = body.getPosition();
-		float deltaX = position.x - kickPhysical.x;
-		Vec2 impulse = new Vec2(deltaX, position.y - kickPhysical.y);
-		impulse.normalize();
-		Vec2 impulseForce = impulse.mul(0.006f);
-		body.applyLinearImpulse(impulseForce,position);
-		body.applyAngularImpulse(impulseForce.x * 0.1f);
+		kickAt(kickPhysical, NORMAL_KICK_MULTIPLIER);
+	}
+	
+	@Override
+	public void longKickAt(PointMeters kickPhysical) {
+		kickAt(kickPhysical, LONG_KICK_MULTIPLIER);
 	}
 
 	@Override
 	public float getAngle() {
 		return body.getAngle();
 	}
-
-	@Override
-	public void longKickAt(PointMeters kickPhysical) {
-		throw new RuntimeException("NOT IMPLEMENTED");
+	
+	private void kickAt(PointMeters kickPhysical, float kickForceMultiplier) {
+		Vec2 position = body.getPosition();
+		float deltaX = position.x - kickPhysical.x;
+		Vec2 impulse = new Vec2(deltaX, position.y - kickPhysical.y);
+		impulse.normalize();
+		Vec2 impulseForce = impulse.mul(kickForceMultiplier);
+		body.applyLinearImpulse(impulseForce,position);
+		body.applyAngularImpulse(impulseForce.x * 0.1f);
 	}
-
 }
