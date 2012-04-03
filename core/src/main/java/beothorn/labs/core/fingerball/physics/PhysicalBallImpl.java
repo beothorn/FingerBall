@@ -7,8 +7,6 @@ import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
 
-import pythagoras.f.MathUtil;
-
 import beothorn.labs.core.fingerball.units.PointMeters;
 
 public class PhysicalBallImpl implements PhysiscalBall {
