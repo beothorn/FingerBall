@@ -1,4 +1,4 @@
-package beothorn.fingerball.units;
+package beothorn.labs.core.fingerball.units;
 
 import junit.framework.Assert;
 

@@ -1,4 +1,4 @@
-package beothorn.fingerball;
+package beothorn.labs.core.fingerball;
 
 import junit.framework.Assert;
 

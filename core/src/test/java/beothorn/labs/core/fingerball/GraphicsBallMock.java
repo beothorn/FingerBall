@@ -1,4 +1,4 @@
-package beothorn.fingerball;
+package beothorn.labs.core.fingerball;
 
 import beothorn.labs.core.fingerball.graphics.GraphicsBall;
 import beothorn.labs.core.fingerball.units.DimensionPixels;

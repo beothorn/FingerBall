@@ -1,4 +1,4 @@
-package beothorn.fingerball;
+package beothorn.labs.core.fingerball;
 
 import beothorn.labs.core.fingerball.Input;
 import beothorn.labs.core.fingerball.InputListener;
