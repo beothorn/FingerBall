@@ -4,6 +4,8 @@ import static playn.core.PlayN.assets;
 import static playn.core.PlayN.graphics;
 import static playn.core.PlayN.log;
 import static playn.core.PlayN.pointer;
+import playn.core.Canvas;
+import playn.core.CanvasImage;
 import playn.core.Game;
 import playn.core.Graphics;
 import playn.core.Image;
@@ -28,6 +30,15 @@ public class FingerBall implements Game {
 	private static final String BALL_IMAGE = "images/soccerBall.png";
 	
 	private Ball ball;
+	
+	private CanvasImage counterImage;
+	private KicksCounter kicksCounter = new KicksCounter(new KickRecordBreakListener() {
+		@Override
+		public void newRecord(int kickCount) {
+			String text = "Best "+kickCount;
+			drawText(text);
+		}
+	});
 
 	@Override
 	public void init() {
@@ -39,8 +50,21 @@ public class FingerBall implements Game {
 		preloadResources();
 		createWorld();
 		createBall();
+		createHUD(screenDimensions);
 	}
 
+	private void createHUD(DimensionPixels screenDimensions) {
+		counterImage = graphics().createImage(screenDimensions.width, screenDimensions.height);
+		ImageLayer counterLayer = graphics().createImageLayer(counterImage);
+		graphics().rootLayer().add(counterLayer);
+		drawText("Do some kickups");
+	}
+
+	private void drawText(String text) {
+		Canvas canvas = counterImage.canvas();
+		canvas.clear();
+		canvas.drawText(text, 10, 20);
+	}
 
 	private void createBall() {
 		Image image = assets().getImage(BALL_IMAGE);
@@ -50,7 +74,7 @@ public class FingerBall implements Game {
 			public void done(Image image) {
 				float imageRadius = image.width() / 2f;
 				PointMeters radiusInMeters = metersToPixels.pixelsToMeters(new PointPixels((int) imageRadius,(int) imageRadius));
-				PhysicalBallImpl physicalBall = new PhysicalBallImpl(world, radiusInMeters.x, 1.0f, 1.0f);
+				PhysicalBallImpl physicalBall = new PhysicalBallImpl(world,kicksCounter, radiusInMeters.x, 1.0f, 1.0f);
 				
 				GraphicsBallImpl graphicsBall = new GraphicsBallImpl(image);
 				
@@ -73,7 +97,7 @@ public class FingerBall implements Game {
 	}
 	
 	private void createWorld() {
-		world = new FingerBallWorld(worldDimension);
+		world = new FingerBallWorld(worldDimension, kicksCounter);
 	}
 
 	private void preloadResources() {
