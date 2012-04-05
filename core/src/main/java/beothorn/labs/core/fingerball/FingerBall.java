@@ -11,6 +11,7 @@ import playn.core.Graphics;
 import playn.core.Image;
 import playn.core.ImageLayer;
 import playn.core.ResourceCallback;
+import playn.core.TextFormat;
 import beothorn.labs.core.fingerball.graphics.GraphicsBallImpl;
 import beothorn.labs.core.fingerball.physics.FingerBallWorld;
 import beothorn.labs.core.fingerball.physics.PhysicalBallImpl;
@@ -63,7 +64,7 @@ public class FingerBall implements Game {
 	private void drawText(String text) {
 		Canvas canvas = counterImage.canvas();
 		canvas.clear();
-		canvas.drawText(text, 10, 20);
+		canvas.drawText(graphics().layoutText(text,new TextFormat()), 10, 20);
 	}
 
 	private void createBall() {

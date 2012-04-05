@@ -25,7 +25,7 @@ public class BallTest {
 
 	@Test
 	public void onLongClickBall_WillUpdatePhysicsBall(){
-		simulateLongClickAt(new PointPixels(5,5));
+		simulateClickAndHoldAt(new PointPixels(5,5));
 		Assert.assertEquals("Kicked at (0.05m,0.05m)\nKick force increased", getPhysicalBallOperations());
 	}
 	
@@ -73,8 +73,10 @@ public class BallTest {
 		subject = new Ball(physicalBall, graphicsBall, input, metersToPixelsConverter);
 	}
 	
-	private void simulateLongClickAt(PointPixels kick) {
-		input.simulateLongKick(kick);
+	private void simulateClickAndHoldAt(PointPixels kick) {
+		simulateClickAt(kick);
+		int delta = 100;
+		subject.update(delta, null);
 	}
 	
 	private void simulateClickAt(PointPixels kick) {

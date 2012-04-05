@@ -6,7 +6,7 @@ import playn.core.Pointer.Event;
 
 public class BallPointerListener implements Pointer.Listener{
 
-	private static final double LONG_KICK_MIN_PRESS_INTERVAL = 80;
+	public static final double LONG_KICK_MIN_PRESS_INTERVAL = 80;
 	private static final double LONG_KICK_MAX_PRESS_INTERVAL = 110;
 	
 	private double pointerStart;

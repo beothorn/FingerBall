@@ -5,11 +5,9 @@ import playn.core.Pointer.Event;
 
 public class PointerStartEvent implements GameEvent {
 
-	private final Event event;
 	private PointPixels position;
 
 	public PointerStartEvent(Event event) {
-		this.event = event;
 		position = new PointPixels((int)event.x(), (int)event.y());
 	}
 
