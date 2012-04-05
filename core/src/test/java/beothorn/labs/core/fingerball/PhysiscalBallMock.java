@@ -16,6 +16,9 @@ class PhysiscalBallMock implements PhysiscalBall {
 
 	@Override
 	public void kickAt(PointMeters kickPhysical) {
+		if(!operations.isEmpty()){
+			operations += "\n";
+		}
 		operations += "Kicked at " + kickPhysical;
 	}
 

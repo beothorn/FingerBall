@@ -19,6 +19,7 @@ import playn.core.Pointer.Listener;
 import playn.core.ResourceCallback;
 import playn.core.TextFormat;
 import beothorn.labs.core.fingerball.events.GameEvent;
+import beothorn.labs.core.fingerball.events.PointerEndEvent;
 import beothorn.labs.core.fingerball.events.PointerStartEvent;
 import beothorn.labs.core.fingerball.graphics.GraphicsBallImpl;
 import beothorn.labs.core.fingerball.physics.FingerBallWorld;
@@ -141,13 +142,14 @@ public class FingerBall implements Game, Listener {
 
 	@Override
 	public void onPointerEnd(Event event) {
+		queueEvent(new PointerEndEvent());
 	}
 
 	@Override
 	public void onPointerDrag(Event event) {
 	}
 	
-	private void queueEvent(PointerStartEvent pointerStartEvent) {
-		eventQueue.add(pointerStartEvent);
+	private void queueEvent(GameEvent gameEvent) {
+		eventQueue.add(gameEvent);
 	}
 }

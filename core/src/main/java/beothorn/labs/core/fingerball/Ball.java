@@ -17,13 +17,12 @@ import beothorn.labs.core.fingerball.units.RectanglePixels;
 
 public class Ball implements GameEventVisitor{
 	
-	private static final float LONG_KICK_MIN_PRESS_INTERVAL = 500;
+	private static final float LONG_KICK_MIN_PRESS_INTERVAL = 200;
 	private PhysiscalBall physicalBall;
 	private GraphicsBall graphicsBall;
 	private MetersToPixelsConverter metersToPixelsConverter;
 	private PointPixels kick;
 	private float timeHoldingKick;
-	private float currentDelta;
 	
 	public Ball(final PhysiscalBall physicalBall,final GraphicsBall graphicsBall, final MetersToPixelsConverter metersToPixelsConverter) {
 		this.physicalBall = physicalBall;
@@ -32,13 +31,12 @@ public class Ball implements GameEventVisitor{
 	}
 
 	public void update(float delta, List<GameEvent> events) {
-		this.currentDelta = delta;
 		if(events != null){
 			processGameEvents(events);
 		}
 		
 		if(kick != null){
-			timeHoldingKick += currentDelta;
+			timeHoldingKick += delta;
 			if(timeHoldingKick >= LONG_KICK_MIN_PRESS_INTERVAL){
 				longKickAt(kick);
 				endKick();
@@ -65,7 +63,7 @@ public class Ball implements GameEventVisitor{
 		}
 		kick = kickPosition;
 		kickAt(kick);
-		timeHoldingKick = currentDelta;
+		timeHoldingKick = 0;
 	}
 	
 	@Override

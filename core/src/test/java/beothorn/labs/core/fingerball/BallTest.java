@@ -21,6 +21,7 @@ import beothorn.labs.core.fingerball.units.RectanglePixels;
 
 public class BallTest {
 
+	private static final int DELTA = 25;
 	PhysiscalBallMock physicalBall = new PhysiscalBallMock();
 	private Ball subject;
 	
@@ -33,6 +34,7 @@ public class BallTest {
 		DimensionMeters meters = new DimensionMeters(1, 1);
 		MetersToPixelsConverter metersToPixelsConverter = new MetersToPixelsConverter(pixels, meters);
 		subject = new Ball(physicalBall, graphicsBall, metersToPixelsConverter);
+		advance();
 	}
 	
 	@Test
@@ -50,43 +52,29 @@ public class BallTest {
 	@Test
 	public void onClickBallAndRelease_WillOnlyDoOneNormalKick(){
 		simulateClickAt(new PointPixels(5,5));
+		advance();
 		simulatePointerRelease();
 		Assert.assertEquals("Kicked at (0.05m,0.05m)", getPhysicalBallOperations());
 	}
 
+	@Test
+	public void afterLongKick_WillDoNormalKick(){
+		simulateClickAndHoldAt(new PointPixels(5,5));
+		simulatePointerRelease();
+		simulateClickAt(new PointPixels(5,5));
+		Assert.assertEquals("Kicked at (0.05m,0.05m)\nKick force increased\nKicked at (0.05m,0.05m)", getPhysicalBallOperations());
+	}
+	
 	private void simulatePointerRelease() {
 		GameEvent pointerStartEvent = new PointerEndEvent();
 		List<GameEvent> events = Arrays.asList(new GameEvent[]{pointerStartEvent});
-		subject.update(1000, events);
-	}
-	
-//	@Test
-//	public void clickAndHold_ShouldDoLongKick(){
-//		
-//		subject.onPointerStart(new MockEvent(1, 2, 0));
-//		subject.onPointerEnd(new MockEvent(1, 2, 79));
-//		
-//		subject.onPointerStart(new MockEvent(2, 3, 0));
-//		int longKickHoldingPointerTimeMillis = 81;
-//		subject.onPointerEnd(new MockEvent(2, 3, longKickHoldingPointerTimeMillis));
-//		
-//		Assert.assertEquals("kickAt((1px,2px))kickAt((2px,3px))longKickAt((2px,3px))", inputLog.toString());
-//	}
-//	
-//	@Test
-//	public void clickAndHoldTooMuch_ShouldDoOnlyNormalKick(){		
-//		subject.onPointerStart(new MockEvent(1, 2, 0));
-//		int tooMuchHoldingPointerTimeMillis = 111;
-//		subject.onPointerEnd(new MockEvent(1, 2, tooMuchHoldingPointerTimeMillis));
-//		
-//		Assert.assertEquals("kickAt((1px,2px))", inputLog.toString());
-//	}
-	
+		advance(events);
+	}	
 
 	@Test
 	public void onClickOutsideBall_WillDoNothingEvenWhenTimePasses(){
 		simulateClickAt(new PointPixels(50,50));
-		subject.update(200, null);
+		advance();
 		String none = "";
 		Assert.assertEquals(none, getPhysicalBallOperations());
 	}
@@ -106,7 +94,7 @@ public class BallTest {
 		PointMeters newPosition = new PointMeters(0.05f, 0.05f);
 		physicalBall.setPositionAnRotation(newPosition, 90);
 		
-		subject.update(0, null);
+		subject.update(DELTA, null);
 		
 		RectanglePixels graphicsBallRectangle = graphicsBall.getRectangle();
 		Assert.assertEquals("5,5", graphicsBallRectangle.x+","+graphicsBallRectangle.y);
@@ -115,16 +103,24 @@ public class BallTest {
 	
 	private void simulateClickAndHoldAt(PointPixels kick) {
 		simulateClickAt(kick);
-		int delta = 1000;
-		subject.update(delta, null);
+		for (int i = 0; i < 10; i++) {			
+			advance();
+		}
 	}
 
 	private void simulateClickAt(PointPixels kick) {
 		MockEvent mockEvent = new MockEvent(kick.x, kick.y, 0);
-		float delta = 0;
 		GameEvent pointerStartEvent = new PointerStartEvent(mockEvent);
 		List<GameEvent> events = Arrays.asList(new GameEvent[]{pointerStartEvent});
-		subject.update(delta, events);
+		advance(events);
+	}
+
+	private void advance() {
+		subject.update(DELTA, null);
+	}
+	
+	private void advance(List<GameEvent> events) {
+		subject.update(DELTA, events);
 	}
 	
 	private String getPhysicalBallOperations() {
