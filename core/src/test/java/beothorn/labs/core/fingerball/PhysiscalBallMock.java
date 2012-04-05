@@ -8,7 +8,7 @@ import beothorn.labs.core.fingerball.units.PointMeters;
 class PhysiscalBallMock implements PhysiscalBall {
 
 	String operations = "";
-	private Vec2 position;
+	private Vec2 position = new Vec2();
 	private int rotation;
 	public String getOperations() {
 		return operations;

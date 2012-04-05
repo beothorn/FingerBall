@@ -120,7 +120,7 @@ public class FingerBall implements Game {
 	@Override
 	public void update(float delta) {
 		world.update();
-		ball.update();
+		ball.update(delta, null);
 	}
 
 	@Override

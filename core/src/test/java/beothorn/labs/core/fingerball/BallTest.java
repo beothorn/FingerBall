@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import beothorn.labs.core.fingerball.Ball;
+import beothorn.labs.core.fingerball.events.GameEvent;
+import beothorn.labs.core.fingerball.events.PointerStartEvent;
 import beothorn.labs.core.fingerball.units.DimensionMeters;
 import beothorn.labs.core.fingerball.units.DimensionPixels;
 import beothorn.labs.core.fingerball.units.MetersToPixelsConverter;
@@ -50,7 +52,7 @@ public class BallTest {
 		PointMeters newPosition = new PointMeters(0.05f, 0.05f);
 		physicalBall.setPositionAnRotation(newPosition, 90);
 		
-		subject.update();
+		subject.update(0, null);
 		
 		RectanglePixels graphicsBallRectangle = graphicsBall.getRectangle();
 		Assert.assertEquals("5,5", graphicsBallRectangle.x+","+graphicsBallRectangle.y);
@@ -58,6 +60,7 @@ public class BallTest {
 
 	PhysiscalBallMock physicalBall = new PhysiscalBallMock();
 	InputMock input = new InputMock();
+	private Ball subject;
 
 	@Before
 	public void setupBall() {
@@ -67,7 +70,7 @@ public class BallTest {
 		DimensionPixels pixels = new DimensionPixels(100, 100);
 		DimensionMeters meters = new DimensionMeters(1, 1);
 		MetersToPixelsConverter metersToPixelsConverter = new MetersToPixelsConverter(pixels, meters);
-		new Ball(physicalBall, graphicsBall, input, metersToPixelsConverter);
+		subject = new Ball(physicalBall, graphicsBall, input, metersToPixelsConverter);
 	}
 	
 	private void simulateLongClickAt(PointPixels kick) {
@@ -75,7 +78,11 @@ public class BallTest {
 	}
 	
 	private void simulateClickAt(PointPixels kick) {
-		input.simulateKick(kick);
+		MockEvent mockEvent = new MockEvent(kick.x, kick.y, 0);
+		GameEvent pointerStartEvent = new PointerStartEvent(mockEvent);
+		float delta = 0;
+		GameEvent[] events = new GameEvent[]{pointerStartEvent};
+		subject.update(delta, events);
 	}
 	
 	private String getPhysicalBallOperations() {
