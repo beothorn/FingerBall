@@ -4,14 +4,22 @@ import static playn.core.PlayN.assets;
 import static playn.core.PlayN.graphics;
 import static playn.core.PlayN.log;
 import static playn.core.PlayN.pointer;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import playn.core.Canvas;
 import playn.core.CanvasImage;
 import playn.core.Game;
 import playn.core.Graphics;
 import playn.core.Image;
 import playn.core.ImageLayer;
+import playn.core.Pointer.Event;
+import playn.core.Pointer.Listener;
 import playn.core.ResourceCallback;
 import playn.core.TextFormat;
+import beothorn.labs.core.fingerball.events.GameEvent;
+import beothorn.labs.core.fingerball.events.PointerStartEvent;
 import beothorn.labs.core.fingerball.graphics.GraphicsBallImpl;
 import beothorn.labs.core.fingerball.physics.FingerBallWorld;
 import beothorn.labs.core.fingerball.physics.PhysicalBallImpl;
@@ -21,7 +29,7 @@ import beothorn.labs.core.fingerball.units.MetersToPixelsConverter;
 import beothorn.labs.core.fingerball.units.PointMeters;
 import beothorn.labs.core.fingerball.units.PointPixels;
 
-public class FingerBall implements Game {
+public class FingerBall implements Game, Listener {
 	
 	private FingerBallWorld world;
 	private MetersToPixelsConverter metersToPixels;
@@ -31,15 +39,16 @@ public class FingerBall implements Game {
 	private static final String BALL_IMAGE = "images/soccerBall.png";
 	
 	private Ball ball;
+	private int kickCount;
 	
 	private CanvasImage counterImage;
 	private KicksCounter kicksCounter = new KicksCounter(new KickRecordBreakListener() {
 		@Override
-		public void newRecord(int kickCount) {
-			String text = "Best "+kickCount;
-			drawText(text);
+		public void newRecord(int newRecord) {
+			kickCount = newRecord;
 		}
 	});
+	private List<GameEvent> eventQueue;
 
 	@Override
 	public void init() {
@@ -47,11 +56,13 @@ public class FingerBall implements Game {
 		graphics.setSize(screenDimensions.width, screenDimensions.height);
 		DimensionPixels screenDimensions = new DimensionPixels(graphics.width(), graphics.height());
 		this.metersToPixels = new MetersToPixelsConverter(screenDimensions, worldDimension);
+		eventQueue = new ArrayList<GameEvent>();
 		createBackground();
 		preloadResources();
 		createWorld();
 		createBall();
 		createHUD(screenDimensions);
+		pointer().setListener(this);
 	}
 
 	private void createHUD(DimensionPixels screenDimensions) {
@@ -79,14 +90,7 @@ public class FingerBall implements Game {
 				
 				GraphicsBallImpl graphicsBall = new GraphicsBallImpl(image);
 				
-				Input input = new Input(){
-					@Override	
-					public void setListener(final InputListener inputListener) { 
-						pointer().setListener(new BallPointerListener(inputListener));
-					}
-				};
-				
-				ball = new Ball(physicalBall,graphicsBall,input,metersToPixels);
+				ball = new Ball(physicalBall,graphicsBall,metersToPixels);
 			}
 
 			@Override
@@ -114,18 +118,36 @@ public class FingerBall implements Game {
 
 	@Override
 	public void paint(float alpha) {
-		// the background automatically paints itself, so no need to do anything
-		// here!
+		String text = "Best "+kickCount;
+		drawText(text);
 	}
 
 	@Override
 	public void update(float delta) {
 		world.update();
-		ball.update(delta, null);
+		ball.update(delta,eventQueue);
+		eventQueue.clear();
 	}
 
 	@Override
 	public int updateRate() {
 		return 25;
+	}
+
+	@Override
+	public void onPointerStart(Event event) {
+		queueEvent(new PointerStartEvent(event));
+	}
+
+	@Override
+	public void onPointerEnd(Event event) {
+	}
+
+	@Override
+	public void onPointerDrag(Event event) {
+	}
+	
+	private void queueEvent(PointerStartEvent pointerStartEvent) {
+		eventQueue.add(pointerStartEvent);
 	}
 }
