@@ -15,7 +15,7 @@ import beothorn.labs.core.fingerball.units.PointMeters;
 import beothorn.labs.core.fingerball.units.PointPixels;
 import beothorn.labs.core.fingerball.units.RectanglePixels;
 
-public class Ball implements GameEventVisitor{
+public class Ball implements GameEventVisitor, Updateable{
 	
 	private static final float LONG_KICK_MIN_PRESS_INTERVAL = 200;
 	private PhysiscalBall physicalBall;
@@ -30,6 +30,7 @@ public class Ball implements GameEventVisitor{
 		this.metersToPixelsConverter = metersToPixelsConverter;
 	}
 
+	@Override
 	public void update(float delta, List<GameEvent> events) {
 		if(events != null){
 			processGameEvents(events);

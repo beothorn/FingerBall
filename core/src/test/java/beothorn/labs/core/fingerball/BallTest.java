@@ -109,7 +109,7 @@ public class BallTest {
 	}
 
 	private void simulateClickAt(PointPixels kick) {
-		MockEvent mockEvent = new MockEvent(kick.x, kick.y, 0);
+		EventMock mockEvent = new EventMock(kick.x, kick.y, 0);
 		GameEvent pointerStartEvent = new PointerStartEvent(mockEvent);
 		List<GameEvent> events = Arrays.asList(new GameEvent[]{pointerStartEvent});
 		advance(events);

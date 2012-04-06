@@ -5,6 +5,7 @@ import beothorn.labs.core.fingerball.units.DimensionPixels;
 import beothorn.labs.core.fingerball.units.PointPixels;
 import beothorn.labs.core.fingerball.units.RectanglePixels;
 
+
 class GraphicsBallMock implements GraphicsBall {
 
 	private RectanglePixels rectanglePixels;

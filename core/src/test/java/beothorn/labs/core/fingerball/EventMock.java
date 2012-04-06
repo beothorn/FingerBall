@@ -2,13 +2,13 @@ package beothorn.labs.core.fingerball;
 
 import playn.core.Pointer.Event;
 
-public class MockEvent implements Event {
+class EventMock implements Event {
 
 	private final float x;
 	private final float y;
 	private final double time;
 
-	public MockEvent(float x,float y, double time) {
+	public EventMock(float x,float y, double time) {
 		this.x = x;
 		this.y = y;
 		this.time = time;

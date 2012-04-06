@@ -4,10 +4,6 @@ import static playn.core.PlayN.assets;
 import static playn.core.PlayN.graphics;
 import static playn.core.PlayN.log;
 import static playn.core.PlayN.pointer;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import playn.core.Canvas;
 import playn.core.CanvasImage;
 import playn.core.Game;
@@ -49,7 +45,7 @@ public class FingerBall implements Game, Listener {
 			kickCount = newRecord;
 		}
 	});
-	private List<GameEvent> eventQueue;
+	private Updater updater;
 
 	@Override
 	public void init() {
@@ -57,13 +53,14 @@ public class FingerBall implements Game, Listener {
 		graphics.setSize(screenDimensions.width, screenDimensions.height);
 		DimensionPixels screenDimensions = new DimensionPixels(graphics.width(), graphics.height());
 		this.metersToPixels = new MetersToPixelsConverter(screenDimensions, worldDimension);
-		eventQueue = new ArrayList<GameEvent>();
-		createBackground();
+		updater = new Updater();
+		pointer().setListener(this);
 		preloadResources();
+		
+		createBackground();
 		createWorld();
 		createBall();
 		createHUD(screenDimensions);
-		pointer().setListener(this);
 	}
 
 	private void createHUD(DimensionPixels screenDimensions) {
@@ -92,6 +89,7 @@ public class FingerBall implements Game, Listener {
 				GraphicsBallImpl graphicsBall = new GraphicsBallImpl(image);
 				
 				ball = new Ball(physicalBall,graphicsBall,metersToPixels);
+				updater.add(ball);
 			}
 
 			@Override
@@ -126,8 +124,7 @@ public class FingerBall implements Game, Listener {
 	@Override
 	public void update(float delta) {
 		world.update();
-		ball.update(delta,eventQueue);
-		eventQueue.clear();
+		updater.update(delta);
 	}
 
 	@Override
@@ -150,6 +147,6 @@ public class FingerBall implements Game, Listener {
 	}
 	
 	private void queueEvent(GameEvent gameEvent) {
-		eventQueue.add(gameEvent);
+		updater.queueEvent(gameEvent);
 	}
 }
