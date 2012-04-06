@@ -10,13 +10,8 @@ import playn.core.Game;
 import playn.core.Graphics;
 import playn.core.Image;
 import playn.core.ImageLayer;
-import playn.core.Pointer.Event;
-import playn.core.Pointer.Listener;
 import playn.core.ResourceCallback;
 import playn.core.TextFormat;
-import beothorn.labs.core.fingerball.events.GameEvent;
-import beothorn.labs.core.fingerball.events.PointerEndEvent;
-import beothorn.labs.core.fingerball.events.PointerStartEvent;
 import beothorn.labs.core.fingerball.graphics.GraphicsBallImpl;
 import beothorn.labs.core.fingerball.physics.FingerBallWorld;
 import beothorn.labs.core.fingerball.physics.PhysicalBallImpl;
@@ -26,7 +21,7 @@ import beothorn.labs.core.fingerball.units.MetersToPixelsConverter;
 import beothorn.labs.core.fingerball.units.PointMeters;
 import beothorn.labs.core.fingerball.units.PointPixels;
 
-public class FingerBall implements Game, Listener {
+public class FingerBall implements Game {
 	
 	private FingerBallWorld world;
 	private MetersToPixelsConverter metersToPixels;
@@ -54,7 +49,8 @@ public class FingerBall implements Game, Listener {
 		DimensionPixels screenDimensions = new DimensionPixels(graphics.width(), graphics.height());
 		this.metersToPixels = new MetersToPixelsConverter(screenDimensions, worldDimension);
 		updater = new Updater();
-		pointer().setListener(this);
+		UpdaterPointerEventQueuer updaterPointerEventQueuer = new UpdaterPointerEventQueuer(updater);
+		pointer().setListener(updaterPointerEventQueuer);
 		preloadResources();
 		
 		createBackground();
@@ -130,23 +126,5 @@ public class FingerBall implements Game, Listener {
 	@Override
 	public int updateRate() {
 		return 25;
-	}
-
-	@Override
-	public void onPointerStart(Event event) {
-		queueEvent(new PointerStartEvent(event));
-	}
-
-	@Override
-	public void onPointerEnd(Event event) {
-		queueEvent(new PointerEndEvent());
-	}
-
-	@Override
-	public void onPointerDrag(Event event) {
-	}
-	
-	private void queueEvent(GameEvent gameEvent) {
-		updater.queueEvent(gameEvent);
 	}
 }
