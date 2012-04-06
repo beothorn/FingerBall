@@ -16,7 +16,7 @@ import beothorn.labs.core.fingerball.units.PointMeters;
 import beothorn.labs.core.fingerball.units.PointPixels;
 import beothorn.labs.core.fingerball.units.RectanglePixels;
 
-public class Ball implements GameEventVisitor, Updateable{
+public class ClickableBall implements GameEventVisitor, Updateable{
 	
 	private static final float LONG_KICK_MIN_PRESS_INTERVAL = 200;
 	private PhysiscalBall physicalBall;
@@ -25,7 +25,7 @@ public class Ball implements GameEventVisitor, Updateable{
 	private PointPixels kick;
 	private float timeHoldingKick;
 	
-	public Ball(final PhysiscalBall physicalBall,final GraphicsBall graphicsBall, final MetersToPixelsConverter metersToPixelsConverter) {
+	public ClickableBall(final PhysiscalBall physicalBall,final GraphicsBall graphicsBall, final MetersToPixelsConverter metersToPixelsConverter) {
 		this.physicalBall = physicalBall;
 		this.graphicsBall = graphicsBall;
 		this.metersToPixelsConverter = metersToPixelsConverter;
@@ -75,7 +75,7 @@ public class Ball implements GameEventVisitor, Updateable{
 	
 	@Override
 	public void visit(PointerDragEvent pointerDragEvent) {
-		throw new RuntimeException("NOT IMPLEMENTED");
+		//do nothing
 	}
 	
 	private void kickAt(PointPixels kick) {

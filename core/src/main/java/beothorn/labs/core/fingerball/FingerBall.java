@@ -30,7 +30,6 @@ public class FingerBall implements Game {
 	private static final String BACKGROUND_IMAGE = "images/background.png";
 	private static final String BALL_IMAGE = "images/soccerBall.png";
 	
-	private Ball ball;
 	private int kickCount;
 	
 	private CanvasImage counterImage;
@@ -81,10 +80,8 @@ public class FingerBall implements Game {
 				float imageRadius = image.width() / 2f;
 				PointMeters radiusInMeters = metersToPixels.pixelsToMeters(new PointPixels((int) imageRadius,(int) imageRadius));
 				PhysicalBallImpl physicalBall = new PhysicalBallImpl(world,kicksCounter, radiusInMeters.x, 1.0f, 1.0f);
-				
 				GraphicsBallImpl graphicsBall = new GraphicsBallImpl(image);
-				
-				ball = new Ball(physicalBall,graphicsBall,metersToPixels);
+				ClickableBall ball = new ClickableBall(physicalBall,graphicsBall,metersToPixels);
 				updater.add(ball);
 			}
 
