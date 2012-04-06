@@ -22,7 +22,7 @@ import beothorn.labs.core.fingerball.units.RectanglePixels;
 public class BallTest {
 
 	private static final int DELTA = 25;
-	PhysiscalBallMock physicalBall = new PhysiscalBallMock();
+	private PhysiscalBallMock physicalBall = new PhysiscalBallMock();
 	private Ball subject;
 	
 	@Before
@@ -65,12 +65,6 @@ public class BallTest {
 		Assert.assertEquals("Kicked at (0.05m,0.05m)\nKick force increased\nKicked at (0.05m,0.05m)", getPhysicalBallOperations());
 	}
 	
-	private void simulatePointerRelease() {
-		GameEvent pointerStartEvent = new PointerEndEvent();
-		List<GameEvent> events = Arrays.asList(new GameEvent[]{pointerStartEvent});
-		advance(events);
-	}	
-
 	@Test
 	public void onClickOutsideBall_WillDoNothingEvenWhenTimePasses(){
 		simulateClickAt(new PointPixels(50,50));
@@ -78,7 +72,7 @@ public class BallTest {
 		String none = "";
 		Assert.assertEquals(none, getPhysicalBallOperations());
 	}
-	
+
 	@Test
 	public void onUpdate_WillUpdateGraphicsBall(){
 		PointPixels pointPixels = new PointPixels(0, 0);
@@ -100,7 +94,12 @@ public class BallTest {
 		Assert.assertEquals("5,5", graphicsBallRectangle.x+","+graphicsBallRectangle.y);
 	}
 
-	
+	private void simulatePointerRelease() {
+		GameEvent pointerStartEvent = new PointerEndEvent();
+		List<GameEvent> events = Arrays.asList(new GameEvent[]{pointerStartEvent});
+		advance(events);
+	}	
+
 	private void simulateClickAndHoldAt(PointPixels kick) {
 		simulateClickAt(kick);
 		for (int i = 0; i < 10; i++) {			

@@ -3,6 +3,7 @@ package beothorn.labs.core.fingerball;
 import playn.core.Pointer.Event;
 import playn.core.Pointer.Listener;
 import beothorn.labs.core.fingerball.events.GameEvent;
+import beothorn.labs.core.fingerball.events.PointerDragEvent;
 import beothorn.labs.core.fingerball.events.PointerEndEvent;
 import beothorn.labs.core.fingerball.events.PointerStartEvent;
 
@@ -26,6 +27,7 @@ public class UpdaterPointerEventQueuer implements Listener {
 
 	@Override
 	public void onPointerDrag(Event event) {
+		queueEvent(new PointerDragEvent(event));
 	}
 	
 	private void queueEvent(GameEvent gameEvent) {

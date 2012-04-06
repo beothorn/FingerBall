@@ -8,4 +8,9 @@ public class PointerEndEvent implements GameEvent {
 		visitor.visit(this);
 	}
 
+	@Override
+	public String toString() {
+		return "pointer end";
+	}
+	
 }

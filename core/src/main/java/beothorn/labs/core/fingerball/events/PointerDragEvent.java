@@ -1,13 +1,14 @@
 package beothorn.labs.core.fingerball.events;
 
-import beothorn.labs.core.fingerball.units.PointPixels;
 import playn.core.Pointer.Event;
+import beothorn.labs.core.fingerball.units.PointPixels;
 
-public class PointerStartEvent implements GameEvent {
+
+public class PointerDragEvent implements GameEvent {
 
 	private PointPixels position;
 
-	public PointerStartEvent(Event event) {
+	public PointerDragEvent(Event event) {
 		position = new PointPixels((int)event.x(), (int)event.y());
 	}
 
@@ -16,13 +17,8 @@ public class PointerStartEvent implements GameEvent {
 		visitor.visit(this);
 	}
 
-	public PointPixels getPosition() {
-		return position;
-	}
-
 	@Override
 	public String toString() {
 		return position.toString();
 	}
-	
 }

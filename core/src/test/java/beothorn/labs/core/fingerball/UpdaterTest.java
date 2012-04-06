@@ -10,12 +10,12 @@ import beothorn.labs.core.fingerball.events.GameEventVisitor;
 
 public class UpdaterTest {
 	
-	private Updater subject;
+	private UpdaterImpl subject;
 	private UpdateableMock updateableMock;
 
 	@Before
 	public void setup() {
-		subject = new Updater();
+		subject = new UpdaterImpl();
 		updateableMock = new UpdateableMock();
 		subject.add(updateableMock);
 	}

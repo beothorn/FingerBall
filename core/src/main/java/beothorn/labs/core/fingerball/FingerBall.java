@@ -40,7 +40,7 @@ public class FingerBall implements Game {
 			kickCount = newRecord;
 		}
 	});
-	private Updater updater;
+	private UpdaterImpl updater;
 
 	@Override
 	public void init() {
@@ -48,7 +48,7 @@ public class FingerBall implements Game {
 		graphics.setSize(screenDimensions.width, screenDimensions.height);
 		DimensionPixels screenDimensions = new DimensionPixels(graphics.width(), graphics.height());
 		this.metersToPixels = new MetersToPixelsConverter(screenDimensions, worldDimension);
-		updater = new Updater();
+		updater = new UpdaterImpl();
 		UpdaterPointerEventQueuer updaterPointerEventQueuer = new UpdaterPointerEventQueuer(updater);
 		pointer().setListener(updaterPointerEventQueuer);
 		preloadResources();

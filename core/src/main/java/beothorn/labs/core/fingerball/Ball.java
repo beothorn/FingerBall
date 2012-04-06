@@ -6,6 +6,7 @@ import org.jbox2d.common.Vec2;
 
 import beothorn.labs.core.fingerball.events.GameEvent;
 import beothorn.labs.core.fingerball.events.GameEventVisitor;
+import beothorn.labs.core.fingerball.events.PointerDragEvent;
 import beothorn.labs.core.fingerball.events.PointerEndEvent;
 import beothorn.labs.core.fingerball.events.PointerStartEvent;
 import beothorn.labs.core.fingerball.graphics.GraphicsBall;
@@ -70,6 +71,11 @@ public class Ball implements GameEventVisitor, Updateable{
 	@Override
 	public void visit(PointerEndEvent pointerEndEvent) {
 		endKick();
+	}
+	
+	@Override
+	public void visit(PointerDragEvent pointerDragEvent) {
+		throw new RuntimeException("NOT IMPLEMENTED");
 	}
 	
 	private void kickAt(PointPixels kick) {
