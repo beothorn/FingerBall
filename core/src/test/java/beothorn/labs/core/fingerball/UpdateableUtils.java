@@ -40,4 +40,12 @@ public class UpdateableUtils {
 		subject.update(DELTA, events);
 	}
 
+	public static void simulateDragAt(BallWithDirection subject,PointPixels kick) {
+		throw new RuntimeException("NOT IMPLEMENTED");
+	}
+
+	public static void simulateMillisPassed(float timePassed) {
+		throw new RuntimeException("NOT IMPLEMENTED");
+	}
+
 }
