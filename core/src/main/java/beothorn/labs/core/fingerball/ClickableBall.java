@@ -10,7 +10,7 @@ import beothorn.labs.core.fingerball.events.PointerDragEvent;
 import beothorn.labs.core.fingerball.events.PointerEndEvent;
 import beothorn.labs.core.fingerball.events.PointerStartEvent;
 import beothorn.labs.core.fingerball.graphics.GraphicsBall;
-import beothorn.labs.core.fingerball.physics.PhysiscalBall;
+import beothorn.labs.core.fingerball.physics.PhysiscalClickableBall;
 import beothorn.labs.core.fingerball.units.MetersToPixelsConverter;
 import beothorn.labs.core.fingerball.units.PointMeters;
 import beothorn.labs.core.fingerball.units.PointPixels;
@@ -19,13 +19,13 @@ import beothorn.labs.core.fingerball.units.RectanglePixels;
 public class ClickableBall implements GameEventVisitor, Updateable{
 	
 	private static final float LONG_KICK_MIN_PRESS_INTERVAL = 200;
-	private PhysiscalBall physicalBall;
+	private PhysiscalClickableBall physicalBall;
 	private GraphicsBall graphicsBall;
 	private MetersToPixelsConverter metersToPixelsConverter;
 	private PointPixels kick;
 	private float timeHoldingKick;
 	
-	public ClickableBall(final PhysiscalBall physicalBall,final GraphicsBall graphicsBall, final MetersToPixelsConverter metersToPixelsConverter) {
+	public ClickableBall(final PhysiscalClickableBall physicalBall,final GraphicsBall graphicsBall, final MetersToPixelsConverter metersToPixelsConverter) {
 		this.physicalBall = physicalBall;
 		this.graphicsBall = graphicsBall;
 		this.metersToPixelsConverter = metersToPixelsConverter;

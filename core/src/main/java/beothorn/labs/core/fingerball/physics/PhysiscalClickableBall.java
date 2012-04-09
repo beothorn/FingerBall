@@ -4,7 +4,7 @@ import org.jbox2d.common.Vec2;
 
 import beothorn.labs.core.fingerball.units.PointMeters;
 
-public interface PhysiscalBall {
+public interface PhysiscalClickableBall {
 
 	public Vec2 getPosition();
 	void kickAt(PointMeters kickPhysical);

@@ -10,14 +10,14 @@ import org.jbox2d.dynamics.FixtureDef;
 import beothorn.labs.core.fingerball.KicksCounter;
 import beothorn.labs.core.fingerball.units.PointMeters;
 
-public class PhysicalBallImpl implements PhysiscalBall {
+public class PhysicalClickableBallImpl implements PhysiscalClickableBall {
 
 	private static final float NORMAL_KICK_MULTIPLIER = 0.006f;
 	private static final float LONG_KICK_MULTIPLIER = 0.002f;
 	private Body body;
 	private final KicksCounter kicksCounter;
 
-	public PhysicalBallImpl(FingerBallWorld world, KicksCounter kicksCounter, float radius, float x, float y) {
+	public PhysicalClickableBallImpl(FingerBallWorld world, KicksCounter kicksCounter, float radius, float x, float y) {
 		this.kicksCounter = kicksCounter;
 		body = createBody(world);
 		FixtureDef fixtureDef = createBallFixture(radius);

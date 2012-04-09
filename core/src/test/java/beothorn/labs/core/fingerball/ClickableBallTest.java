@@ -15,7 +15,7 @@ import beothorn.labs.core.fingerball.units.RectanglePixels;
 
 public class ClickableBallTest {
 
-	private PhysiscalBallMock physicalBall = new PhysiscalBallMock();
+	private PhysiscalClickableBallMock physicalBall = new PhysiscalClickableBallMock();
 	private ClickableBall subject;
 	
 	@Before

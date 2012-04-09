@@ -10,7 +10,7 @@ public class BallWithDirectionTest {
 
 	@Test
 	public void onClickAndDrag_ShouldDecideDirectionBasedOnLastDragPointBeforeMaxDraggingTime(){
-		PhysiscalBallMock physicalBall = new PhysiscalBallMock();
+		PhysiscalBallWithDirectioMock physicalBall = new PhysiscalBallWithDirectioMock();
 		BallWithDirection subject = new BallWithDirection(physicalBall);
 		PointPixels kick = new PointPixels(0, 0);
 		UpdateableUtils.simulateClickAt(subject, kick);

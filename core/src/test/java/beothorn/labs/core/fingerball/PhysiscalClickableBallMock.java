@@ -2,10 +2,10 @@ package beothorn.labs.core.fingerball;
 
 import org.jbox2d.common.Vec2;
 
-import beothorn.labs.core.fingerball.physics.PhysiscalBall;
+import beothorn.labs.core.fingerball.physics.PhysiscalClickableBall;
 import beothorn.labs.core.fingerball.units.PointMeters;
 
-class PhysiscalBallMock implements PhysiscalBall {
+class PhysiscalClickableBallMock implements PhysiscalClickableBall {
 
 	String operations = "";
 	private Vec2 position = new Vec2();

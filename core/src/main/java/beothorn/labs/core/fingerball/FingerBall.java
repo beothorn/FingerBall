@@ -14,7 +14,7 @@ import playn.core.ResourceCallback;
 import playn.core.TextFormat;
 import beothorn.labs.core.fingerball.graphics.GraphicsBallImpl;
 import beothorn.labs.core.fingerball.physics.FingerBallWorld;
-import beothorn.labs.core.fingerball.physics.PhysicalBallImpl;
+import beothorn.labs.core.fingerball.physics.PhysicalClickableBallImpl;
 import beothorn.labs.core.fingerball.units.DimensionMeters;
 import beothorn.labs.core.fingerball.units.DimensionPixels;
 import beothorn.labs.core.fingerball.units.MetersToPixelsConverter;
@@ -79,7 +79,7 @@ public class FingerBall implements Game {
 			public void done(Image image) {
 				float imageRadius = image.width() / 2f;
 				PointMeters radiusInMeters = metersToPixels.pixelsToMeters(new PointPixels((int) imageRadius,(int) imageRadius));
-				PhysicalBallImpl physicalBall = new PhysicalBallImpl(world,kicksCounter, radiusInMeters.x, 1.0f, 1.0f);
+				PhysicalClickableBallImpl physicalBall = new PhysicalClickableBallImpl(world,kicksCounter, radiusInMeters.x, 1.0f, 1.0f);
 				GraphicsBallImpl graphicsBall = new GraphicsBallImpl(image);
 				ClickableBall ball = new ClickableBall(physicalBall,graphicsBall,metersToPixels);
 				updater.add(ball);

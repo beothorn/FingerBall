@@ -6,7 +6,7 @@ import beothorn.labs.core.fingerball.events.GameEvent;
 
 public class BallWithDirection implements Updateable {
 
-	public BallWithDirection(PhysiscalBallMock physicalBall) {
+	public BallWithDirection(PhysiscalBallWithDirectioMock physicalBall) {
 		// TODO Auto-generated constructor stub
 	}
 
