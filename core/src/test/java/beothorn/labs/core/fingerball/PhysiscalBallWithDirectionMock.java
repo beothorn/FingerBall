@@ -24,4 +24,14 @@ public class PhysiscalBallWithDirectionMock implements PhysiscalBallWithDirectio
 		operations.append("Applied force"+ force.toString());
 	}
 
+	@Override
+	public Vec2 getPosition() {
+		throw new RuntimeException("NOT IMPLEMENTED");
+	}
+
+	@Override
+	public float getAngle() {
+		throw new RuntimeException("NOT IMPLEMENTED");
+	}
+
 }

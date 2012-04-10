@@ -40,6 +40,7 @@ public class FingerBall implements Game {
 		}
 	});
 	private UpdaterImpl updater;
+	private PhysicsToGraphicsPositionUpdater physicsToGraphicsPositionUpdater;
 
 	@Override
 	public void init() {
@@ -49,6 +50,7 @@ public class FingerBall implements Game {
 		this.metersToPixels = new MetersToPixelsConverter(screenDimensions, worldDimension);
 		updater = new UpdaterImpl();
 		UpdaterPointerEventQueuer updaterPointerEventQueuer = new UpdaterPointerEventQueuer(updater);
+		physicsToGraphicsPositionUpdater = new PhysicsToGraphicsPositionUpdater(metersToPixels);
 		pointer().setListener(updaterPointerEventQueuer);
 		preloadResources();
 		
@@ -79,12 +81,15 @@ public class FingerBall implements Game {
 			public void done(Image image) {
 				float imageRadius = image.width() / 2f;
 				PointMeters radiusInMeters = metersToPixels.pixelsToMeters(new PointPixels((int) imageRadius,(int) imageRadius));
+				
 				PhysicalClickableBallImpl physicalBall = new PhysicalClickableBallImpl(world,kicksCounter, radiusInMeters.x, 1.0f, 1.0f);
 				GraphicsBallImpl graphicsBall = new GraphicsBallImpl(image);
+				physicsToGraphicsPositionUpdater.registerToUpdate(graphicsBall, physicalBall);
 				ClickableBall ball = new ClickableBall(physicalBall,graphicsBall,metersToPixels);
 				updater.add(ball);
+				
+				
 			}
-
 			@Override
 			public void error(Throwable err) {
 				log().error("Error loading image!", err);
@@ -118,6 +123,7 @@ public class FingerBall implements Game {
 	public void update(float delta) {
 		world.update();
 		updater.update(delta);
+		physicsToGraphicsPositionUpdater.update();
 	}
 
 	@Override

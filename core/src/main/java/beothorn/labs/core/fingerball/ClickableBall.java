@@ -2,8 +2,6 @@ package beothorn.labs.core.fingerball;
 
 import java.util.List;
 
-import org.jbox2d.common.Vec2;
-
 import beothorn.labs.core.fingerball.events.GameEvent;
 import beothorn.labs.core.fingerball.events.GameEventVisitor;
 import beothorn.labs.core.fingerball.events.PointerDragEvent;
@@ -44,7 +42,6 @@ public class ClickableBall implements GameEventVisitor, Updateable{
 				endKick();
 			}
 		}
-		propagatePhycicalChangesToGraphics();
 	}
 
 	private void endKick() {
@@ -94,13 +91,4 @@ public class ClickableBall implements GameEventVisitor, Updateable{
 		return pointIsNotInsideBall;
 	}
 	
-	private void propagatePhycicalChangesToGraphics() {
-		Vec2 position = physicalBall.getPosition();
-		PointMeters bodyPosition = new PointMeters(position.x, position.y);
-		graphicsBall.setRotation(physicalBall.getAngle());
-		PointPixels pixelPosition = metersToPixelsConverter.metersToPixels(bodyPosition);
-		int x = pixelPosition.x;
-		int y = pixelPosition.y;
-		graphicsBall.setLocation(x, y);
-	}
 }

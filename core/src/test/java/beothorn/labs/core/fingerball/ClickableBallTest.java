@@ -9,9 +9,7 @@ import org.junit.Test;
 import beothorn.labs.core.fingerball.units.DimensionMeters;
 import beothorn.labs.core.fingerball.units.DimensionPixels;
 import beothorn.labs.core.fingerball.units.MetersToPixelsConverter;
-import beothorn.labs.core.fingerball.units.PointMeters;
 import beothorn.labs.core.fingerball.units.PointPixels;
-import beothorn.labs.core.fingerball.units.RectanglePixels;
 
 public class ClickableBallTest {
 
@@ -64,27 +62,6 @@ public class ClickableBallTest {
 		UpdateableUtils.advance(subject);
 		String none = "";
 		Assert.assertEquals(none, getPhysicalBallOperations());
-	}
-
-	@Test
-	public void onUpdate_WillUpdateGraphicsBall(){
-		PointPixels pointPixels = new PointPixels(0, 0);
-		DimensionPixels dimensionPixels = new DimensionPixels(10, 10);
-		GraphicsElementMock graphicsBall = new GraphicsElementMock(pointPixels,dimensionPixels);
-		
-		DimensionPixels pixels = new DimensionPixels(100, 100);
-		DimensionMeters meters = new DimensionMeters(1, 1);
-		MetersToPixelsConverter metersToPixelsConverter = new MetersToPixelsConverter(pixels, meters);
-		
-		ClickableBall subject = new ClickableBall(physicalBall, graphicsBall, metersToPixelsConverter);
-		
-		PointMeters newPosition = new PointMeters(0.05f, 0.05f);
-		physicalBall.setPositionAnRotation(newPosition, 90);
-		
-		UpdateableUtils.advance(subject);
-		
-		RectanglePixels graphicsBallRectangle = graphicsBall.getRectangle();
-		Assert.assertEquals("5,5", graphicsBallRectangle.x+","+graphicsBallRectangle.y);
 	}
 
 	private String getPhysicalBallOperations() {
