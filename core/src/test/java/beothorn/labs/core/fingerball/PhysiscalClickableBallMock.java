@@ -10,16 +10,22 @@ class PhysiscalClickableBallMock implements PhysiscalClickableBall {
 	String operations = "";
 	private Vec2 position = new Vec2();
 	private int rotation;
+	
 	public String getOperations() {
 		return operations;
 	}
 
 	@Override
 	public void kickAt(PointMeters kickPhysical) {
+		String operation = "Kicked at " + kickPhysical;
+		addOperation(operation);
+	}
+
+	private void addOperation(String operation) {
 		if(!operations.isEmpty()){
 			operations += "\n";
 		}
-		operations += "Kicked at " + kickPhysical;
+		operations += operation;
 	}
 
 	public void setPositionAnRotation(PointMeters newPosition, int rotation) {

@@ -2,7 +2,7 @@ package beothorn.labs.core.fingerball.graphics;
 
 import beothorn.labs.core.fingerball.units.RectanglePixels;
 
-public interface GraphicsBall {
+public interface GraphicsElement {
 
 	RectanglePixels getRectangle();
 	void setRotation(float angle);

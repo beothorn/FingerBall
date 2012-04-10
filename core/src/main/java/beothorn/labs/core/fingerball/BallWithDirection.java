@@ -9,6 +9,7 @@ import beothorn.labs.core.fingerball.events.GameEventVisitor;
 import beothorn.labs.core.fingerball.events.PointerDragEvent;
 import beothorn.labs.core.fingerball.events.PointerEndEvent;
 import beothorn.labs.core.fingerball.events.PointerStartEvent;
+import beothorn.labs.core.fingerball.physics.PhysiscalBallWithDirection;
 import beothorn.labs.core.fingerball.units.MetersToPixelsConverter;
 import beothorn.labs.core.fingerball.units.PointMeters;
 import beothorn.labs.core.fingerball.units.PointPixels;

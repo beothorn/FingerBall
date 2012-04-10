@@ -22,7 +22,7 @@ public class ClickableBallTest {
 	public void setupBall() {
 		PointPixels pointPixels = new PointPixels(0, 0);
 		DimensionPixels dimensionPixels = new DimensionPixels(10, 10);
-		GraphicsBallMock graphicsBall = new GraphicsBallMock(pointPixels,dimensionPixels);
+		GraphicsElementMock graphicsBall = new GraphicsElementMock(pointPixels,dimensionPixels);
 		DimensionPixels pixels = new DimensionPixels(100, 100);
 		DimensionMeters meters = new DimensionMeters(1, 1);
 		MetersToPixelsConverter metersToPixelsConverter = new MetersToPixelsConverter(pixels, meters);
@@ -70,7 +70,7 @@ public class ClickableBallTest {
 	public void onUpdate_WillUpdateGraphicsBall(){
 		PointPixels pointPixels = new PointPixels(0, 0);
 		DimensionPixels dimensionPixels = new DimensionPixels(10, 10);
-		GraphicsBallMock graphicsBall = new GraphicsBallMock(pointPixels,dimensionPixels);
+		GraphicsElementMock graphicsBall = new GraphicsElementMock(pointPixels,dimensionPixels);
 		
 		DimensionPixels pixels = new DimensionPixels(100, 100);
 		DimensionMeters meters = new DimensionMeters(1, 1);

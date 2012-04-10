@@ -2,6 +2,8 @@ package beothorn.labs.core.fingerball;
 
 import org.jbox2d.common.Vec2;
 
+import beothorn.labs.core.fingerball.physics.PhysiscalBallWithDirection;
+
 public class PhysiscalBallWithDirectionMock implements PhysiscalBallWithDirection{
 
 	private StringBuffer operations;

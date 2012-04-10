@@ -7,7 +7,7 @@ import beothorn.labs.core.fingerball.units.DimensionPixels;
 import beothorn.labs.core.fingerball.units.PointPixels;
 import beothorn.labs.core.fingerball.units.RectanglePixels;
 
-public class GraphicsBallImpl implements GraphicsBall {
+public class GraphicsBallImpl implements GraphicsElement {
 
 	private ImageLayer ballImageLayer;
 	private float angle;

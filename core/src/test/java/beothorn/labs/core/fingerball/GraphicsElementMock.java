@@ -1,17 +1,17 @@
 package beothorn.labs.core.fingerball;
 
-import beothorn.labs.core.fingerball.graphics.GraphicsBall;
+import beothorn.labs.core.fingerball.graphics.GraphicsElement;
 import beothorn.labs.core.fingerball.units.DimensionPixels;
 import beothorn.labs.core.fingerball.units.PointPixels;
 import beothorn.labs.core.fingerball.units.RectanglePixels;
 
 
-class GraphicsBallMock implements GraphicsBall {
+class GraphicsElementMock implements GraphicsElement {
 
 	private RectanglePixels rectanglePixels;
 	private float angle;
 
-	public GraphicsBallMock(final PointPixels pointPixels, DimensionPixels dimensionPixels) {
+	public GraphicsElementMock(final PointPixels pointPixels, DimensionPixels dimensionPixels) {
 		rectanglePixels = new RectanglePixels(pointPixels, dimensionPixels); 
 	}
 
