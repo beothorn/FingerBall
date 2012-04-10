@@ -6,7 +6,7 @@ import beothorn.labs.core.fingerball.units.PointPixels;
 import beothorn.labs.core.fingerball.units.RectanglePixels;
 
 
-class GraphicsElementMock implements GraphicsElement {
+public class GraphicsElementMock implements GraphicsElement {
 
 	private RectanglePixels rectanglePixels;
 	private float angle;

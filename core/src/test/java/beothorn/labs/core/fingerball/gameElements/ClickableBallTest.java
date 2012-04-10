@@ -1,4 +1,4 @@
-package beothorn.labs.core.fingerball;
+package beothorn.labs.core.fingerball.gameElements;
 
 
 import junit.framework.Assert;
@@ -6,6 +6,9 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import beothorn.labs.core.fingerball.GraphicsElementMock;
+import beothorn.labs.core.fingerball.UpdateableUtils;
+import beothorn.labs.core.fingerball.gameElements.ClickableBall;
 import beothorn.labs.core.fingerball.units.DimensionMeters;
 import beothorn.labs.core.fingerball.units.DimensionPixels;
 import beothorn.labs.core.fingerball.units.MetersToPixelsConverter;

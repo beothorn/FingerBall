@@ -2,7 +2,7 @@ package beothorn.labs.core.fingerball;
 
 import playn.core.Pointer.Event;
 
-public class PointerEventMock implements Event {
+class PointerEventMock implements Event {
 
 	@Override
 	public float x() {

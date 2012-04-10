@@ -1,9 +1,10 @@
-package beothorn.labs.core.fingerball;
+package beothorn.labs.core.fingerball.gameElements;
 
 import java.util.List;
 
 import org.jbox2d.common.Vec2;
 
+import beothorn.labs.core.fingerball.Updateable;
 import beothorn.labs.core.fingerball.events.GameEvent;
 import beothorn.labs.core.fingerball.events.GameEventVisitor;
 import beothorn.labs.core.fingerball.events.PointerDragEvent;

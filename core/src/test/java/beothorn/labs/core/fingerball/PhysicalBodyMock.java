@@ -4,7 +4,7 @@ import org.jbox2d.common.Vec2;
 
 import beothorn.labs.core.fingerball.physics.PhysicalBody;
 
-public class PhysicalBodyMock implements PhysicalBody {
+class PhysicalBodyMock implements PhysicalBody {
 
 	private Vec2 position;
 

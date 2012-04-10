@@ -12,6 +12,8 @@ import playn.core.Image;
 import playn.core.ImageLayer;
 import playn.core.ResourceCallback;
 import playn.core.TextFormat;
+import beothorn.labs.core.fingerball.gameElements.BallWithDirection;
+import beothorn.labs.core.fingerball.gameElements.ClickableBall;
 import beothorn.labs.core.fingerball.graphics.GraphicsBallImpl;
 import beothorn.labs.core.fingerball.physics.FingerBallWorld;
 import beothorn.labs.core.fingerball.physics.PhysicalClickableBallImpl;
