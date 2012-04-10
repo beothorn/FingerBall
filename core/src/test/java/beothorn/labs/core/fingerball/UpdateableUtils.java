@@ -9,30 +9,29 @@ import beothorn.labs.core.fingerball.events.PointerStartEvent;
 import beothorn.labs.core.fingerball.units.PointPixels;
 
 public class UpdateableUtils {
-
+	
 	private static final int DELTA = 25;
 	
-	static void simulatePointerRelease(Updateable subject) {
-		GameEvent pointerStartEvent = new PointerEndEvent();
-		List<GameEvent> events = Arrays.asList(new GameEvent[]{pointerStartEvent});
-		advance(subject, events);
+	public static void simulatePointerRelease(Updateable subject) {
+		PointPixels releasePosition = new PointPixels(0, 0);
+		simulatePointerRelease(subject, releasePosition);
 	}
 
-	static void simulateClickAndHoldAt(Updateable subject, PointPixels kick) {
+	public static void simulateClickAndHoldAt(Updateable subject, PointPixels kick) {
 		simulateClickAt(subject, kick);
 		for (int i = 0; i < 10; i++) {			
 			advance(subject);
 		}
 	}
 
-	static void simulateClickAt(Updateable subject, PointPixels kick) {
-		EventMock mockEvent = new EventMock(kick.x, kick.y, 0);
+	public static void simulateClickAt(Updateable subject, PointPixels clickPosition) {
+		EventMock mockEvent = new EventMock(clickPosition.x, clickPosition.y, 0);
 		GameEvent pointerStartEvent = new PointerStartEvent(mockEvent);
 		List<GameEvent> events = Arrays.asList(new GameEvent[]{pointerStartEvent});
 		advance(subject, events);
 	}
 
-	static void advance(Updateable subject) {
+	public static void advance(Updateable subject) {
 		subject.update(DELTA, null);
 	}
 
@@ -40,12 +39,19 @@ public class UpdateableUtils {
 		subject.update(DELTA, events);
 	}
 
-	public static void simulateDragAt(BallWithDirection subject,PointPixels kick) {
+	public static void simulateDragAt(Updateable subject,PointPixels kick) {
 		throw new RuntimeException("NOT IMPLEMENTED");
 	}
 
 	public static void simulateMillisPassed(float timePassed) {
 		throw new RuntimeException("NOT IMPLEMENTED");
+	}
+
+	public static void simulatePointerRelease(Updateable subject,PointPixels releasePosition) {
+		EventMock mockEvent = new EventMock(releasePosition.x, releasePosition.y, 0);
+		GameEvent pointerEndEvent = new PointerEndEvent(mockEvent);
+		List<GameEvent> events = Arrays.asList(new GameEvent[]{pointerEndEvent});
+		advance(subject, events);
 	}
 
 }

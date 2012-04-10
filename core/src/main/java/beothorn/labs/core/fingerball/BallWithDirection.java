@@ -2,17 +2,57 @@ package beothorn.labs.core.fingerball;
 
 import java.util.List;
 
+import org.jbox2d.common.Vec2;
+
 import beothorn.labs.core.fingerball.events.GameEvent;
+import beothorn.labs.core.fingerball.events.GameEventVisitor;
+import beothorn.labs.core.fingerball.events.PointerDragEvent;
+import beothorn.labs.core.fingerball.events.PointerEndEvent;
+import beothorn.labs.core.fingerball.events.PointerStartEvent;
+import beothorn.labs.core.fingerball.units.MetersToPixelsConverter;
+import beothorn.labs.core.fingerball.units.PointMeters;
+import beothorn.labs.core.fingerball.units.PointPixels;
 
-public class BallWithDirection implements Updateable {
+public class BallWithDirection implements Updateable,GameEventVisitor {
 
-	public BallWithDirection(PhysiscalBallWithDirectioMock physicalBall) {
-		// TODO Auto-generated constructor stub
+	private final PhysiscalBallWithDirection physicalBall;
+	private final MetersToPixelsConverter metersToPixelsConverter;
+	private PointMeters startingPoint;
+
+	public BallWithDirection(PhysiscalBallWithDirection physicalBall, final MetersToPixelsConverter metersToPixelsConverter) {
+		this.physicalBall = physicalBall;
+		this.metersToPixelsConverter = metersToPixelsConverter;
 	}
 
 	@Override
 	public void update(float delta, List<GameEvent> events) {
-		throw new RuntimeException("NOT IMPLEMENTED");
+		if(events != null){
+			processGameEvents(events);
+		}
+	}
+	
+	private void processGameEvents(List<GameEvent> events) {
+		for (GameEvent gameEvent : events) {
+			gameEvent.accept(this);
+		}
+	}
+
+	@Override
+	public void visit(PointerStartEvent pointerStartEvent) {
+		PointPixels vectorStartScreenCoords = pointerStartEvent.getPosition();
+		startingPoint = metersToPixelsConverter.pixelsToMeters(vectorStartScreenCoords);
+	}
+
+	@Override
+	public void visit(PointerEndEvent pointerEndEvent) {
+		PointPixels vectorEndScreenCoords = pointerEndEvent.getPosition();
+		PointMeters endingPoint = metersToPixelsConverter.pixelsToMeters(vectorEndScreenCoords);
+		Vec2 force = new Vec2(endingPoint.x - startingPoint.x, endingPoint.y - startingPoint.y);
+		physicalBall.applyForce(force);
+	}
+
+	@Override
+	public void visit(PointerDragEvent pointerDragEvent) {
 	}
 
 }

@@ -31,7 +31,7 @@ public class UpdaterPointerEventQueuerTest {
 	@Test
 	public void shouldAddPointerEndEventToTheQueue(){
 		subject.onPointerEnd(new PointerEventMock());
-		Assert.assertEquals("PointerEndEvent | pointer end", events.toString());
+		Assert.assertEquals("PointerEndEvent | (0px,0px)", events.toString());
 	}
 	
 	@Test

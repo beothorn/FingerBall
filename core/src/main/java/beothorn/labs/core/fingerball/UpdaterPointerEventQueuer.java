@@ -22,7 +22,7 @@ public class UpdaterPointerEventQueuer implements Listener {
 
 	@Override
 	public void onPointerEnd(Event event) {
-		queueEvent(new PointerEndEvent());
+		queueEvent(new PointerEndEvent(event));
 	}
 
 	@Override
