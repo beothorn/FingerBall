@@ -28,4 +28,14 @@ public class LevelMock implements Level {
 		destroy = true;
 	}
 
+	@Override
+	public void paint(float delta) {
+		throw new RuntimeException("NOT IMPLEMENTED");
+	}
+
+	@Override
+	public void update(float delta) {
+		throw new RuntimeException("NOT IMPLEMENTED");
+	}
+
 }

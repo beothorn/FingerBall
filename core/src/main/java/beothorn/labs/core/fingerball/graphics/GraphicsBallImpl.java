@@ -58,4 +58,8 @@ public class GraphicsBallImpl implements GraphicsElement {
 		return ballImageLayer.originY();
 	}
 
+	public void destroy() {
+		ballImageLayer.destroy();
+	}
+
 }

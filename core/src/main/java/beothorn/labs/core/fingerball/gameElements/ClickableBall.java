@@ -91,5 +91,9 @@ public class ClickableBall implements GameEventVisitor, Updateable{
 		boolean pointIsNotInsideBall = rectangle.contains(kick);
 		return pointIsNotInsideBall;
 	}
+
+	public void destroy() {
+		throw new RuntimeException("NOT IMPLEMENTED");
+	}
 	
 }
