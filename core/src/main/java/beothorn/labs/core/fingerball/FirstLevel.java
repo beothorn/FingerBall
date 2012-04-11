@@ -10,6 +10,7 @@ import playn.core.ImageLayer;
 import playn.core.TextFormat;
 import beothorn.labs.core.fingerball.gameElements.BallWithDirection;
 import beothorn.labs.core.fingerball.gameElements.ClickableBall;
+import beothorn.labs.core.fingerball.gameElements.PhysicsToGraphicsPositionUpdater;
 import beothorn.labs.core.fingerball.gameElements.VectorDrawerImpl;
 import beothorn.labs.core.fingerball.graphics.GraphicsBallImpl;
 import beothorn.labs.core.fingerball.graphics.GraphicsElementImpl;

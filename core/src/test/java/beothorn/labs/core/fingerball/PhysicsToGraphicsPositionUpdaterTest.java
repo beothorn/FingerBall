@@ -4,6 +4,7 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
+import beothorn.labs.core.fingerball.gameElements.PhysicsToGraphicsPositionUpdater;
 import beothorn.labs.core.fingerball.graphics.GraphicsElement;
 import beothorn.labs.core.fingerball.units.DimensionMeters;
 import beothorn.labs.core.fingerball.units.DimensionPixels;

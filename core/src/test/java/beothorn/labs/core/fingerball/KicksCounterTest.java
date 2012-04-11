@@ -18,12 +18,12 @@ public class KicksCounterTest {
 			}
 		});
 		subject.kick();
-		subject.kick();
-		subject.kick();
-		Assert.assertEquals(3, subject.getKicksCount());
 		subject.hitTheGround();
-		Assert.assertEquals(0, subject.getKicksCount());
-		Assert.assertEquals(3, record.get());
+		Assert.assertEquals(1, record.get());
+		subject.kick();
+		subject.kick();
+		subject.hitTheGround();
+		Assert.assertEquals(2, record.get());
 	}
 	
 }

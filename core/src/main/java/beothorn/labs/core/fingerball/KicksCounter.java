@@ -14,10 +14,6 @@ public class KicksCounter {
 		kicks++;
 	}
 
-	public Object getKicksCount() {
-		return kicks;
-	}
-
 	public void hitTheGround() {
 		if(kicks> bestKicks){
 			bestKicks = kicks;

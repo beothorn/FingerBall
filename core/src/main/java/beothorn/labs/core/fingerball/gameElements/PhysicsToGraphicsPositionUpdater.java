@@ -1,4 +1,4 @@
-package beothorn.labs.core.fingerball;
+package beothorn.labs.core.fingerball.gameElements;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
