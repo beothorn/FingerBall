@@ -21,4 +21,8 @@ public class PointerDragEvent implements GameEvent {
 	public String toString() {
 		return position.toString();
 	}
+
+	public PointPixels getPosition() {
+		return position;
+	}
 }

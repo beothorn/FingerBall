@@ -8,5 +8,7 @@ public interface GraphicsElement {
 	void setRotation(float angle);
 	void setLocation(int x, int y);
 	float getAngle();
+	float getOriginX();
+	float getOriginY();
 
 }

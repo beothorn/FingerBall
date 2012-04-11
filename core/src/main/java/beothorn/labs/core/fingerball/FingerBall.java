@@ -14,6 +14,7 @@ import playn.core.ResourceCallback;
 import playn.core.TextFormat;
 import beothorn.labs.core.fingerball.gameElements.BallWithDirection;
 import beothorn.labs.core.fingerball.gameElements.ClickableBall;
+import beothorn.labs.core.fingerball.gameElements.VectorDrawer;
 import beothorn.labs.core.fingerball.graphics.GraphicsBallImpl;
 import beothorn.labs.core.fingerball.physics.FingerBallWorld;
 import beothorn.labs.core.fingerball.physics.PhysicalClickableBallImpl;
@@ -95,7 +96,8 @@ public class FingerBall implements Game {
 				PhysiscalBallWithDirectionImpl physiscalBallWithDirectionImpl = new PhysiscalBallWithDirectionImpl(world, radiusInMeters.x, 0.5f, 1.0f);
 				GraphicsBallImpl graphicsBall2 = new GraphicsBallImpl(image);
 				physicsToGraphicsPositionUpdater.registerToUpdate(graphicsBall2, physiscalBallWithDirectionImpl);
-				BallWithDirection ballWithDirection = new BallWithDirection(physiscalBallWithDirectionImpl, metersToPixels);
+				VectorDrawer vectorDrawer = new VectorDrawer(screenDimensions,graphicsBall2);
+				BallWithDirection ballWithDirection = new BallWithDirection(physiscalBallWithDirectionImpl,vectorDrawer, metersToPixels);
 				updater.add(ballWithDirection);
 				
 			}

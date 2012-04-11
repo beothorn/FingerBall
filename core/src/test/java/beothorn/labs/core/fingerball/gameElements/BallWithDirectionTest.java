@@ -19,7 +19,7 @@ public class BallWithDirectionTest {
 		DimensionPixels pixels = new DimensionPixels(100, 100);
 		DimensionMeters meters = new DimensionMeters(1, 1);
 		MetersToPixelsConverter metersToPixelsConverter = new MetersToPixelsConverter(pixels, meters);
-		BallWithDirection subject = new BallWithDirection(physicalBall,metersToPixelsConverter);
+		BallWithDirection subject = new BallWithDirection(physicalBall,null,metersToPixelsConverter);
 		PointPixels vectorStart = new PointPixels(50, 50);
 		UpdateableUtils.simulateClickAt(subject, vectorStart);
 		PointPixels vectorEnd = new PointPixels(100, 100);

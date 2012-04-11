@@ -48,4 +48,14 @@ public class GraphicsBallImpl implements GraphicsElement {
 		return angle;
 	}
 
+	@Override
+	public float getOriginX() {
+		return ballImageLayer.originX();
+	}
+
+	@Override
+	public float getOriginY() {
+		return ballImageLayer.originY();
+	}
+
 }

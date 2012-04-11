@@ -33,4 +33,14 @@ public class GraphicsElementMock implements GraphicsElement {
 	public float getAngle() {
 		return angle;
 	}
+
+	@Override
+	public float getOriginX() {
+		throw new RuntimeException("NOT IMPLEMENTED");
+	}
+
+	@Override
+	public float getOriginY() {
+		throw new RuntimeException("NOT IMPLEMENTED");
+	}
 }

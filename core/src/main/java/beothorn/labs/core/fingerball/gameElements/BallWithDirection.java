@@ -20,9 +20,11 @@ public class BallWithDirection implements Updateable,GameEventVisitor {
 	private final PhysiscalBallWithDirection physicalBall;
 	private final MetersToPixelsConverter metersToPixelsConverter;
 	private PointMeters startingPoint;
+	private final VectorDrawer vectorDrawer;
 
-	public BallWithDirection(PhysiscalBallWithDirection physicalBall, final MetersToPixelsConverter metersToPixelsConverter) {
+	public BallWithDirection(PhysiscalBallWithDirection physicalBall, VectorDrawer vectorDrawer, final MetersToPixelsConverter metersToPixelsConverter) {
 		this.physicalBall = physicalBall;
+		this.vectorDrawer = vectorDrawer;
 		this.metersToPixelsConverter = metersToPixelsConverter;
 	}
 
@@ -37,12 +39,14 @@ public class BallWithDirection implements Updateable,GameEventVisitor {
 		for (GameEvent gameEvent : events) {
 			gameEvent.accept(this);
 		}
+		vectorDrawer.redraw();
 	}
 
 	@Override
 	public void visit(PointerStartEvent pointerStartEvent) {
 		PointPixels vectorStartScreenCoords = pointerStartEvent.getPosition();
 		startingPoint = metersToPixelsConverter.pixelsToMeters(vectorStartScreenCoords);
+		vectorDrawer.startVector(vectorStartScreenCoords); 
 	}
 
 	@Override
@@ -51,10 +55,13 @@ public class BallWithDirection implements Updateable,GameEventVisitor {
 		PointMeters endingPoint = metersToPixelsConverter.pixelsToMeters(vectorEndScreenCoords);
 		Vec2 force = new Vec2(endingPoint.x - startingPoint.x, endingPoint.y - startingPoint.y);
 		physicalBall.applyForce(force);
+		vectorDrawer.clearVector();
 	}
 
 	@Override
 	public void visit(PointerDragEvent pointerDragEvent) {
+		PointPixels vectorEndScreenCoords = pointerDragEvent.getPosition();
+		vectorDrawer.updateVector(vectorEndScreenCoords);
 	}
 
 }
