@@ -1,4 +1,4 @@
-package beothorn.labs.core.fingerball;
+package beothorn.labs.core.fingerball.update;
 
 import junit.framework.Assert;
 
@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import beothorn.labs.core.fingerball.events.GameEvent;
+import beothorn.labs.core.fingerball.update.Updater;
+import beothorn.labs.core.fingerball.update.UpdaterPointerEventQueuer;
 
 public class UpdaterPointerEventQueuerTest {
 

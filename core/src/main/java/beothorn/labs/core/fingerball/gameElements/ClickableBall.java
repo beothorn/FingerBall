@@ -2,7 +2,6 @@ package beothorn.labs.core.fingerball.gameElements;
 
 import java.util.List;
 
-import beothorn.labs.core.fingerball.Updateable;
 import beothorn.labs.core.fingerball.events.GameEvent;
 import beothorn.labs.core.fingerball.events.GameEventVisitor;
 import beothorn.labs.core.fingerball.events.PointerDragEvent;
@@ -14,6 +13,7 @@ import beothorn.labs.core.fingerball.units.MetersToPixelsConverter;
 import beothorn.labs.core.fingerball.units.PointMeters;
 import beothorn.labs.core.fingerball.units.PointPixels;
 import beothorn.labs.core.fingerball.units.RectanglePixels;
+import beothorn.labs.core.fingerball.update.Updateable;
 
 public class ClickableBall implements GameEventVisitor, Updateable{
 	

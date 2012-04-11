@@ -2,7 +2,6 @@ package beothorn.labs.core.fingerball;
 
 import static playn.core.PlayN.assets;
 import static playn.core.PlayN.graphics;
-import static playn.core.PlayN.log;
 import static playn.core.PlayN.pointer;
 import playn.core.Canvas;
 import playn.core.CanvasImage;
@@ -10,7 +9,6 @@ import playn.core.Game;
 import playn.core.Graphics;
 import playn.core.Image;
 import playn.core.ImageLayer;
-import playn.core.ResourceCallback;
 import playn.core.TextFormat;
 import beothorn.labs.core.fingerball.gameElements.BallWithDirection;
 import beothorn.labs.core.fingerball.gameElements.ClickableBall;
@@ -25,6 +23,8 @@ import beothorn.labs.core.fingerball.units.DimensionPixels;
 import beothorn.labs.core.fingerball.units.MetersToPixelsConverter;
 import beothorn.labs.core.fingerball.units.PointMeters;
 import beothorn.labs.core.fingerball.units.PointPixels;
+import beothorn.labs.core.fingerball.update.UpdaterImpl;
+import beothorn.labs.core.fingerball.update.UpdaterPointerEventQueuer;
 
 public class FingerBall implements Game {
 	
@@ -32,6 +32,7 @@ public class FingerBall implements Game {
 	private MetersToPixelsConverter metersToPixels;
 	private static final DimensionPixels screenDimensions = new DimensionPixels(800, 600);
 	private static final DimensionMeters worldDimension = new DimensionMeters(2.31f,1.73f);
+	
 	private static final String BACKGROUND_IMAGE = "images/background.png";
 	private static final String BALL_IMAGE = "images/soccerBall.png";
 	private static final String GOAL_IMAGE = "images/goal.png";
@@ -61,27 +62,14 @@ public class FingerBall implements Game {
 		UpdaterPointerEventQueuer updaterPointerEventQueuer = new UpdaterPointerEventQueuer(updater);
 		physicsToGraphicsPositionUpdater = new PhysicsToGraphicsPositionUpdater(metersToPixels);
 		pointer().setListener(updaterPointerEventQueuer);
+		
 		preloadResources();
 		
 		createBackground();
 		createWorld();
 		createBall();
 		Image goalImage = assets().getImage(GOAL_IMAGE);
-
-		goalImage.addCallback(new ResourceCallback<Image>() {
-
-
-			@Override
-			public void done(Image resource) {
-				goal = new GraphicsElementImpl(resource, 100, 100);
-			}
-
-			@Override
-			public void error(Throwable err) {
-				log().error("Error loading image!", err);
-			}
-			
-		});
+		goal = new GraphicsElementImpl(goalImage, 100, 100);
 		
 		createHUD(screenDimensions);
 	}
@@ -104,37 +92,24 @@ public class FingerBall implements Game {
 	}
 
 	private void createBall() {
-		Image ballmage = assets().getImage(BALL_IMAGE);
-
-		ballmage.addCallback(new ResourceCallback<Image>() {
-			
-			@Override
-			public void done(Image image) {
-				float imageRadius = image.width() / 2f;
-				PointMeters radiusInMeters = metersToPixels.pixelsToMeters(new PointPixels((int) imageRadius,(int) imageRadius));
-				
-				PhysicalClickableBallImpl physicalBall = new PhysicalClickableBallImpl(world,kicksCounter, radiusInMeters.x, 1.0f, 1.0f);
-				GraphicsBallImpl graphicsBall = new GraphicsBallImpl(image);
-				physicsToGraphicsPositionUpdater.registerToUpdate(graphicsBall, physicalBall);
-				ClickableBall ball = new ClickableBall(physicalBall,graphicsBall,metersToPixels);
-				updater.add(ball);
-				
-				
-				PhysiscalBallWithDirectionImpl physiscalBallWithDirectionImpl = new PhysiscalBallWithDirectionImpl(world, radiusInMeters.x, 0.5f, 1.0f);
-				vectorBallGraphics = new GraphicsBallImpl(image);
-				physicsToGraphicsPositionUpdater.registerToUpdate(vectorBallGraphics, physiscalBallWithDirectionImpl);
-				VectorDrawerImpl vectorDrawer = new VectorDrawerImpl(screenDimensions,vectorBallGraphics);
-				BallWithDirection ballWithDirection = new BallWithDirection(physiscalBallWithDirectionImpl,vectorDrawer, metersToPixels);
-				updater.add(ballWithDirection);
-				
-				
-			}
-			@Override
-			public void error(Throwable err) {
-				log().error("Error loading image!", err);
-			}
-			
-		});
+		Image image = assets().getImage(BALL_IMAGE);
+		
+		float imageRadius = image.width() / 2f;
+		PointMeters radiusInMeters = metersToPixels.pixelsToMeters(new PointPixels((int) imageRadius,(int) imageRadius));
+		
+		PhysicalClickableBallImpl physicalBall = new PhysicalClickableBallImpl(world,kicksCounter, radiusInMeters.x, 1.0f, 1.0f);
+		GraphicsBallImpl graphicsBall = new GraphicsBallImpl(image);
+		physicsToGraphicsPositionUpdater.registerToUpdate(graphicsBall, physicalBall);
+		ClickableBall ball = new ClickableBall(physicalBall,graphicsBall,metersToPixels);
+		updater.add(ball);
+		
+		
+		PhysiscalBallWithDirectionImpl physiscalBallWithDirectionImpl = new PhysiscalBallWithDirectionImpl(world, radiusInMeters.x, 0.5f, 1.0f);
+		vectorBallGraphics = new GraphicsBallImpl(image);
+		physicsToGraphicsPositionUpdater.registerToUpdate(vectorBallGraphics, physiscalBallWithDirectionImpl);
+		VectorDrawerImpl vectorDrawer = new VectorDrawerImpl(screenDimensions,vectorBallGraphics);
+		BallWithDirection ballWithDirection = new BallWithDirection(physiscalBallWithDirectionImpl,vectorDrawer, metersToPixels);
+		updater.add(ballWithDirection);
 	}
 	
 	private void createWorld() {
@@ -142,6 +117,7 @@ public class FingerBall implements Game {
 	}
 
 	private void preloadResources() {
+		//TODO: Loading screen
 		assets().getImage(BALL_IMAGE);
 		assets().getImage(BACKGROUND_IMAGE);
 		assets().getImage(GOAL_IMAGE);

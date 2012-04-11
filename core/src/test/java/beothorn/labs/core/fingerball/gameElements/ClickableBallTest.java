@@ -7,12 +7,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import beothorn.labs.core.fingerball.GraphicsElementMock;
-import beothorn.labs.core.fingerball.UpdateableUtils;
 import beothorn.labs.core.fingerball.gameElements.ClickableBall;
 import beothorn.labs.core.fingerball.units.DimensionMeters;
 import beothorn.labs.core.fingerball.units.DimensionPixels;
 import beothorn.labs.core.fingerball.units.MetersToPixelsConverter;
 import beothorn.labs.core.fingerball.units.PointPixels;
+import beothorn.labs.core.fingerball.update.UpdateableUtils;
 
 public class ClickableBallTest {
 

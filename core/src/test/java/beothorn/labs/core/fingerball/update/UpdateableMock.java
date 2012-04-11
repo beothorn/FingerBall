@@ -1,8 +1,9 @@
-package beothorn.labs.core.fingerball;
+package beothorn.labs.core.fingerball.update;
 
 import java.util.List;
 
 import beothorn.labs.core.fingerball.events.GameEvent;
+import beothorn.labs.core.fingerball.update.Updateable;
 
 class UpdateableMock implements Updateable {
 

@@ -1,27 +1,17 @@
-package beothorn.labs.core.fingerball;
+package beothorn.labs.core.fingerball.update;
 
 import playn.core.Pointer.Event;
 
-class EventMock implements Event {
+class PointerEventMock implements Event {
 
-	private final float x;
-	private final float y;
-	private final double time;
-
-	public EventMock(float x,float y, double time) {
-		this.x = x;
-		this.y = y;
-		this.time = time;
-	}
-	
 	@Override
 	public float x() {
-		return x;
+		return 0;
 	}
 
 	@Override
 	public float y() {
-		return y;
+		return 0;
 	}
 
 	@Override
@@ -36,7 +26,7 @@ class EventMock implements Event {
 
 	@Override
 	public double time() {
-		return time;
+		throw new RuntimeException("NOT IMPLEMENTED");
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package beothorn.labs.core.fingerball;
+package beothorn.labs.core.fingerball.update;
 
 import beothorn.labs.core.fingerball.events.GameEvent;
 
