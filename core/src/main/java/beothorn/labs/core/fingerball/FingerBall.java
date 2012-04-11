@@ -15,6 +15,8 @@ import beothorn.labs.core.fingerball.gameElements.ClickableBall;
 import beothorn.labs.core.fingerball.gameElements.VectorDrawerImpl;
 import beothorn.labs.core.fingerball.graphics.GraphicsBallImpl;
 import beothorn.labs.core.fingerball.graphics.GraphicsElementImpl;
+import beothorn.labs.core.fingerball.level.Level;
+import beothorn.labs.core.fingerball.level.LevelChangeListener;
 import beothorn.labs.core.fingerball.physics.FingerBallWorld;
 import beothorn.labs.core.fingerball.physics.PhysicalClickableBallImpl;
 import beothorn.labs.core.fingerball.physics.PhysiscalBallWithDirectionImpl;
@@ -26,7 +28,7 @@ import beothorn.labs.core.fingerball.units.PointPixels;
 import beothorn.labs.core.fingerball.update.UpdaterImpl;
 import beothorn.labs.core.fingerball.update.UpdaterPointerEventQueuer;
 
-public class FingerBall implements Game {
+public class FingerBall implements Game, LevelChangeListener { 
 	
 	private FingerBallWorld world;
 	private MetersToPixelsConverter metersToPixels;
@@ -51,6 +53,7 @@ public class FingerBall implements Game {
 	private UpdaterImpl updater;
 	private PhysicsToGraphicsPositionUpdater physicsToGraphicsPositionUpdater;
 	private String text;
+	private Level level;
 
 	@Override
 	public void init() {
@@ -147,5 +150,14 @@ public class FingerBall implements Game {
 	@Override
 	public int updateRate() {
 		return 25;
+	}
+
+	@Override
+	public void setLevel(Level level) {
+		if(this.level != null){
+			this.level.destroy();
+		}
+		this.level = level;
+		level.init();
 	}
 }
