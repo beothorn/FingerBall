@@ -4,6 +4,7 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
+import beothorn.labs.core.fingerball.GraphicsElementMock;
 import beothorn.labs.core.fingerball.UpdateableUtils;
 import beothorn.labs.core.fingerball.gameElements.BallWithDirection;
 import beothorn.labs.core.fingerball.units.DimensionMeters;
@@ -19,7 +20,7 @@ public class BallWithDirectionTest {
 		DimensionPixels pixels = new DimensionPixels(100, 100);
 		DimensionMeters meters = new DimensionMeters(1, 1);
 		MetersToPixelsConverter metersToPixelsConverter = new MetersToPixelsConverter(pixels, meters);
-		BallWithDirection subject = new BallWithDirection(physicalBall,null,metersToPixelsConverter);
+		BallWithDirection subject = new BallWithDirection(physicalBall,new VectorDrawerMock(),metersToPixelsConverter);
 		PointPixels vectorStart = new PointPixels(50, 50);
 		UpdateableUtils.simulateClickAt(subject, vectorStart);
 		PointPixels vectorEnd = new PointPixels(100, 100);

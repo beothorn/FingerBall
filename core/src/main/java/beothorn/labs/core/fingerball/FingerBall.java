@@ -14,8 +14,9 @@ import playn.core.ResourceCallback;
 import playn.core.TextFormat;
 import beothorn.labs.core.fingerball.gameElements.BallWithDirection;
 import beothorn.labs.core.fingerball.gameElements.ClickableBall;
-import beothorn.labs.core.fingerball.gameElements.VectorDrawer;
+import beothorn.labs.core.fingerball.gameElements.VectorDrawerImpl;
 import beothorn.labs.core.fingerball.graphics.GraphicsBallImpl;
+import beothorn.labs.core.fingerball.graphics.GraphicsElementImpl;
 import beothorn.labs.core.fingerball.physics.FingerBallWorld;
 import beothorn.labs.core.fingerball.physics.PhysicalClickableBallImpl;
 import beothorn.labs.core.fingerball.physics.PhysiscalBallWithDirectionImpl;
@@ -33,18 +34,22 @@ public class FingerBall implements Game {
 	private static final DimensionMeters worldDimension = new DimensionMeters(2.31f,1.73f);
 	private static final String BACKGROUND_IMAGE = "images/background.png";
 	private static final String BALL_IMAGE = "images/soccerBall.png";
+	private static final String GOAL_IMAGE = "images/goal.png";
 	
-	private int kickCount;
+	
+	private GraphicsElementImpl goal;
+	private GraphicsBallImpl vectorBallGraphics;
 	
 	private CanvasImage counterImage;
 	private KicksCounter kicksCounter = new KicksCounter(new KickRecordBreakListener() {
 		@Override
 		public void newRecord(int newRecord) {
-			kickCount = newRecord;
+			drawText("Best "+newRecord);
 		}
 	});
 	private UpdaterImpl updater;
 	private PhysicsToGraphicsPositionUpdater physicsToGraphicsPositionUpdater;
+	private String text;
 
 	@Override
 	public void init() {
@@ -61,6 +66,23 @@ public class FingerBall implements Game {
 		createBackground();
 		createWorld();
 		createBall();
+		Image goalImage = assets().getImage(GOAL_IMAGE);
+
+		goalImage.addCallback(new ResourceCallback<Image>() {
+
+
+			@Override
+			public void done(Image resource) {
+				goal = new GraphicsElementImpl(resource, 100, 100);
+			}
+
+			@Override
+			public void error(Throwable err) {
+				log().error("Error loading image!", err);
+			}
+			
+		});
+		
 		createHUD(screenDimensions);
 	}
 
@@ -71,16 +93,21 @@ public class FingerBall implements Game {
 		drawText("Do some kickups");
 	}
 
-	private void drawText(String text) {
+	private void drawText(String text){
+		this.text = text;
+	}
+	
+	private void drawText() {
 		Canvas canvas = counterImage.canvas();
 		canvas.clear();
 		canvas.drawText(graphics().layoutText(text,new TextFormat()), 10, 20);
 	}
 
 	private void createBall() {
-		Image image = assets().getImage(BALL_IMAGE);
+		Image ballmage = assets().getImage(BALL_IMAGE);
 
-		image.addCallback(new ResourceCallback<Image>() {
+		ballmage.addCallback(new ResourceCallback<Image>() {
+			
 			@Override
 			public void done(Image image) {
 				float imageRadius = image.width() / 2f;
@@ -94,11 +121,12 @@ public class FingerBall implements Game {
 				
 				
 				PhysiscalBallWithDirectionImpl physiscalBallWithDirectionImpl = new PhysiscalBallWithDirectionImpl(world, radiusInMeters.x, 0.5f, 1.0f);
-				GraphicsBallImpl graphicsBall2 = new GraphicsBallImpl(image);
-				physicsToGraphicsPositionUpdater.registerToUpdate(graphicsBall2, physiscalBallWithDirectionImpl);
-				VectorDrawer vectorDrawer = new VectorDrawer(screenDimensions,graphicsBall2);
+				vectorBallGraphics = new GraphicsBallImpl(image);
+				physicsToGraphicsPositionUpdater.registerToUpdate(vectorBallGraphics, physiscalBallWithDirectionImpl);
+				VectorDrawerImpl vectorDrawer = new VectorDrawerImpl(screenDimensions,vectorBallGraphics);
 				BallWithDirection ballWithDirection = new BallWithDirection(physiscalBallWithDirectionImpl,vectorDrawer, metersToPixels);
 				updater.add(ballWithDirection);
+				
 				
 			}
 			@Override
@@ -116,6 +144,7 @@ public class FingerBall implements Game {
 	private void preloadResources() {
 		assets().getImage(BALL_IMAGE);
 		assets().getImage(BACKGROUND_IMAGE);
+		assets().getImage(GOAL_IMAGE);
 	}
 
 	private void createBackground() {
@@ -126,8 +155,7 @@ public class FingerBall implements Game {
 
 	@Override
 	public void paint(float alpha) {
-		String text = "Best "+kickCount;
-		drawText(text);
+		drawText();
 	}
 
 	@Override
@@ -135,6 +163,9 @@ public class FingerBall implements Game {
 		world.update();
 		updater.update(delta);
 		physicsToGraphicsPositionUpdater.update();
+		if(goal.getRectangle().intersects(vectorBallGraphics.getRectangle())){
+			drawText("Win");
+		}
 	}
 
 	@Override
