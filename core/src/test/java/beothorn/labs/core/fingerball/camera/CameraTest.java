@@ -2,6 +2,7 @@ package beothorn.labs.core.fingerball.camera;
 
 import junit.framework.Assert;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import beothorn.labs.core.fingerball.units.DimensionPixels;
@@ -10,6 +11,7 @@ import beothorn.labs.core.fingerball.units.RectanglePixels;
 
 public class CameraTest {
 
+	@Ignore
 	@Test
 	public void testCamera(){
 		RectanglePixels focusRectangle = new RectanglePixels(new PointPixels(10, 10), new DimensionPixels(10, 10));
